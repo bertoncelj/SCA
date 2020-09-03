@@ -1,0 +1,11 @@
+# python 
+__pycache__/
+*.so
+
+
+# VIM
+*~
+*.swp
+*.un
+
+
