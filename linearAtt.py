@@ -4,6 +4,53 @@ import matplotlib.pyplot as plt
 from  numpy import linalg as LA
 import statsmodels.api as sm
 
+TRACES_NUMBER = 200
+TRACE_LENGTH = 1000 ## number of samples
+KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
+
+# for faster calculation 
+sbox = np.load('data/aessbox.npy')
+
+
+traceRange = range(0, TRACE_LENGTH)
+# load traces, data
+npzfile = np.load('traces/swaes_atmega_power.trs.npz')
+loadData = npzfile['data'][:,0]
+loadTraces = npzfile['traces'][traceRange, TRACE_LENGTH]
+
+
+def infoNpzFile(npzfile):
+    allNpzTypes = ('data', 'traces')
+    for typeNpz in allNpzTypes:
+        # construct matrix
+        colums = len(npzfile[typeNpz][:,0])
+        rows = len(npzfile[typeNpz][0,:])
+        print("Npzfile: ", typeNpz)
+        print("Matrix size: rows:", rows, " colums: ", colums)
+
+def printTrace(npzTrace, numTrace=0):
+    xLength = len(npzTrace[numTrace, :])
+    print("len x: ", xLength)
+    xSamples = range(0, xLength)
+    print("x: ", xSamples)
+    ySamples = npzTrace[numTrace, :]
+    plt.plot(xSamples, ySamples, color='red')
+
+    plt.xlabel("Time") # adding the name of x-axis
+    plt.ylabel("Y samples") # adding the name of y-axis
+    plt.show() # specifies end of graph
+
+# leakage models:
+def leakageModel2():
+    a=np.array([6,1,5,0,2])
+    b=np.array(np.zeros((5)))
+
+    for i in range(5):
+        b[i] = '{:08b}'.format(a[i])
+
+
+    print(b)
+
 
 def Rsquare(y, x):
     y_mean = np.mean(y)
@@ -27,6 +74,22 @@ def Rsquare(y, x):
     Rsq = 1 - (SSres/SStot)
     print(Rsq)
 
+
+infoNpzFile(npzfile)
+# printTrace(npzfile['traces'])
+
+
+#build prediction
+keyByte = np.uint8(KNOW_KEY[0])
+sBoxOut = sbox[loadData ^ keyByte]
+print("loadData: ", loadData)
+print("sBoxOut: ", sBoxOut)
+
+# X = map(leakageModel2, sBoxOut)
+leakageModel2()
+
+
+'''
 dataset = pd.read_csv('Salary_Data.csv')
 print(dataset.head())
 X = dataset["Salary"]
@@ -135,3 +198,5 @@ plt.scatter(X[:,0], y_rez2, color='green')
 plt.xlabel("Years of experience") # adding the name of x-axis
 plt.ylabel("Salaries") # adding the name of y-axis
 plt.show() # specifies end of graph
+'''
+
