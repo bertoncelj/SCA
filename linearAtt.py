@@ -1,22 +1,30 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from  numpy import linalg as LA
 import statsmodels.api as sm
 
 TRACES_NUMBER = 200
 TRACE_LENGTH = 1000 ## number of samples
+TRACE_STARTING_SAMPLE = 800
+offset = 0
 KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
 
 # for faster calculation 
 sbox = np.load('data/aessbox.npy')
 
-
-traceRange = range(0, TRACE_LENGTH)
+traceRange = range(0, TRACES_NUMBER)
+sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH) 
 # load traces, data
 npzfile = np.load('traces/swaes_atmega_power.trs.npz')
 loadData = npzfile['data'][:,0]
 loadTraces = npzfile['traces'][traceRange, TRACE_LENGTH]
+traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
+
+print(traces)
+
+def infoMatrixDemensions(A):
+    print("Colums:", len(traces))
+    print("Rows:", len(traces[0]))
 
 
 def infoNpzFile(npzfile):
@@ -40,17 +48,19 @@ def printTrace(npzTrace, numTrace=0):
     plt.ylabel("Y samples") # adding the name of y-axis
     plt.show() # specifies end of graph
 
-# leakage models:
-def leakageModel2():
-    a=np.array([6,1,5,0,2])
-    b=np.array(np.zeros((5)))
+# # leakage models:
+# def leakageModel2():
+#     a=np.array([6,1,5,0,2])
+#     b=np.array(np.zeros((5)))
+#     for i in range(5):
+#         b[i] = '{:08b}'.format(a[i])
 
-    for i in range(5):
-        b[i] = '{:08b}'.format(a[i])
-
-
-    print(b)
-
+def leakageModel2(x):
+    g = []
+    for i in range(0, 2):
+        bit = (x >> i) & 1
+        g.append(bit)
+    return g
 
 def Rsquare(y, x):
     y_mean = np.mean(y)
@@ -85,9 +95,16 @@ sBoxOut = sbox[loadData ^ keyByte]
 print("loadData: ", loadData)
 print("sBoxOut: ", sBoxOut)
 
-# X = map(leakageModel2, sBoxOut)
-leakageModel2()
+X = list(map(leakageModel2, sBoxOut))
+A = sm.add_constant(X, prepend=False)
 
+infoMatrixDemensions(traces)
+infoMatrixDemensions(A)
+infoMatrixDemensions(X)
+print(A)
+results = sm.OLS(traces, X).fit() # the OLS itself
+betaOLS = results.params 
+print(results.summary())
 
 '''
 dataset = pd.read_csv('Salary_Data.csv')
