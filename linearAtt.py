@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 from  numpy import linalg as LA
 import statsmodels.api as sm
 
+from condaveraes import * # incremental conditional averaging
+import functools
+import operator
+
+
+SboxNum = 0
 TRACES_NUMBER = 200
 TRACE_LENGTH = 1000 ## number of samples
 TRACE_STARTING_SAMPLE = 800
@@ -16,11 +22,33 @@ traceRange = range(0, TRACES_NUMBER)
 sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH) 
 # load traces, data
 npzfile = np.load('traces/swaes_atmega_power.trs.npz')
-loadData = npzfile['data'][:,0]
+data = npzfile['data'][:, SboxNum]
 loadTraces = npzfile['traces'][traceRange, TRACE_LENGTH]
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
 
 print(traces)
+
+foldl = lambda func, acc, xs: functools.reduce(func, xs, acc)
+
+def mean(vecArr):
+    sumArr = foldl(operator.sub, 0, vecArr)
+    
+    return sumArr/vecArr.size
+def lraAES(data, traces, sBox):
+    yi = mean(traces[0])
+
+    
+    SStot = np.sum((traces - np.mean(traces, 0)) ** 2, 0)
+
+    ### 2. The main attack loop
+
+    # preallocate arrays
+    SSreg = np.empty((64, traceLength)) # Sum of Squares due to regression
+    E = np.empty(numTraces)              # expected values
+
+    allCoefs = [] # placeholder for regression coefficient
+
+
 
 def infoMatrixDemensions(A):
     print("Colums:", len(traces))
@@ -90,21 +118,36 @@ infoNpzFile(npzfile)
 
 
 #build prediction
-keyByte = np.uint8(KNOW_KEY[0])
-sBoxOut = sbox[loadData ^ keyByte]
-print("loadData: ", loadData)
-print("sBoxOut: ", sBoxOut)
+# keyByte = np.uint8(KNOW_KEY[0])
+# sBoxOut = sbox[loadData ^ keyByte]
+# print("loadData: ", loadData)
+# print("sBoxOut: ", sBoxOut)
 
-X = list(map(leakageModel2, sBoxOut))
-A = sm.add_constant(X, prepend=False)
 
-infoMatrixDemensions(traces)
-infoMatrixDemensions(A)
-infoMatrixDemensions(X)
-print(A)
-results = sm.OLS(traces, X).fit() # the OLS itself
-betaOLS = results.params 
-print(results.summary())
+(numTraces, traceLength) = traces.shape
+CondAver = ConditionalAveragerAesSbox(256, traceLength)
+
+for i in range (0, 200): #200 trace attack
+    CondAver.addTrace(data[i], traces[i])
+
+
+(avdata, avtraces) = CondAver.getSnapshot()
+lraAES(avdata, avtraces, data)
+
+
+
+# print("HHHH", CondAver)
+
+# X = list(map(leakageModel2, sBoxOut))
+# A = sm.add_constant(X, prepend=False)
+
+# infoMatrixDemensions(traces)
+# infoMatrixDemensions(A)
+# infoMatrixDemensions(X)
+# print(A)
+# results = sm.OLS(traces, X).fit() # the OLS itself
+# betaOLS = results.params 
+# print(results.summary())
 
 '''
 dataset = pd.read_csv('Salary_Data.csv')
