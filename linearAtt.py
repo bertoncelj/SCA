@@ -19,27 +19,38 @@ KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
 sbox = np.load('data/aessbox.npy')
 
 traceRange = range(0, TRACES_NUMBER)
-sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH) 
+sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
 # load traces, data
 npzfile = np.load('traces/swaes_atmega_power.trs.npz')
 data = npzfile['data'][:, SboxNum]
-loadTraces = npzfile['traces'][traceRange, TRACE_LENGTH]
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
 
 print(traces)
-
 foldl = lambda func, acc, xs: functools.reduce(func, xs, acc)
 
 def mean(vecArr):
     sumArr = foldl(operator.sub, 0, vecArr)
-    
     return sumArr/vecArr.size
+
+def tr(A):
+    return [[row[i] for row in A] for i in range(len(A[0]))]
+
 def lraAES(data, traces, sBox):
-    yi = mean(traces[0])
+    finArr = []
+    for i in range(0, TRACE_LENGTH):
+        oneTrs = traces.T[i]
+        yi_mean = mean(oneTrs)
+        sum_samples = 0
+        for sample in oneTrs: 
+            sum_samples = sum_samples + ((abs(sample) - yi_mean) ** 2)
+        finArr.append(sum_samples)
+    print(finArr)
 
-    
     SStot = np.sum((traces - np.mean(traces, 0)) ** 2, 0)
-
+    # print(traces)
+    # print(np.mean(traces, 0))
+    print(SStot)
+    print(len(SStot))
     ### 2. The main attack loop
 
     # preallocate arrays
@@ -48,6 +59,42 @@ def lraAES(data, traces, sBox):
 
     allCoefs = [] # placeholder for regression coefficient
 
+    # per-keycandidate loop
+    for k in np.arange(0, 256, dtype='uint8'):
+
+        keyByte = np.uint8(k)
+        sBoxOut = sbox[data ^ keyByte]
+        X = list(map(leakageModel2, sBoxOut))
+
+        # predict intermediate variable
+        M = X
+        print(M)
+        # some precomputations before the per-sample loop
+        P = np.dot(np.linalg.inv(np.dot(tr(M), M)), tr(M))
+        #Q = np.dot(M, P)
+
+        coefs = [] # placeholder for regression coefficients
+
+        # per-sample loop: solve the system for each time moment
+        for u in range(0,TRACE_LENGTH):
+
+            # if do not need coefficients beta - use precomputed value
+            #np.dot(Q, traces[:,u], out=E)
+
+            # if need the coefficients - do the multiplication using
+            # two dot products and let the functuion return beta alongside R2
+            beta = np.dot(P, traces[:,u])
+            coefs.append(beta)
+            E = np.dot(M, beta)
+
+            SSreg[k,u] = np.sum((E - traces[:,u]) ** 2)
+
+        allCoefs.append(coefs)
+        #print 'Done with candidate', k
+
+    ### 3. compute Rsquared
+    R2 = 1 - SSreg / SStot[None, :]
+    pritn(R2)
 
 
 def infoMatrixDemensions(A):
@@ -132,6 +179,7 @@ for i in range (0, 200): #200 trace attack
 
 
 (avdata, avtraces) = CondAver.getSnapshot()
+print("avr_trace: ", avtraces)
 lraAES(avdata, avtraces, data)
 
 
