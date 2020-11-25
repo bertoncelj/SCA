@@ -7,9 +7,8 @@ from condaveraes import * # incremental conditional averaging
 import functools
 import operator
 
-
 SboxNum = 0
-TRACES_NUMBER = 200
+TRACES_NUMBER = 50
 TRACE_LENGTH = 1000 ## number of samples
 TRACE_STARTING_SAMPLE = 800
 offset = 0
@@ -49,8 +48,8 @@ def lraAES(data, traces, sBox):
     SStot = np.sum((traces - np.mean(traces, 0)) ** 2, 0)
     # print(traces)
     # print(np.mean(traces, 0))
-    print(SStot)
-    print(len(SStot))
+    # print(SStot)
+    # print(len(SStot))
     ### 2. The main attack loop
 
     # preallocate arrays
@@ -60,7 +59,7 @@ def lraAES(data, traces, sBox):
     allCoefs = [] # placeholder for regression coefficient
 
     # per-keycandidate loop
-    for k in np.arange(0, 256, dtype='uint8'):
+    for k in np.arange(0, 64, dtype='uint8'):
 
         keyByte = np.uint8(k)
         sBoxOut = sbox[data ^ keyByte]
@@ -68,7 +67,8 @@ def lraAES(data, traces, sBox):
 
         # predict intermediate variable
         M = X
-        print(M)
+
+        # print(M)
         # some precomputations before the per-sample loop
         P = np.dot(np.linalg.inv(np.dot(tr(M), M)), tr(M))
         #Q = np.dot(M, P)
@@ -84,6 +84,9 @@ def lraAES(data, traces, sBox):
             # if need the coefficients - do the multiplication using
             # two dot products and let the functuion return beta alongside R2
             beta = np.dot(P, traces[:,u])
+            # print("beta: ", beta)
+            # print("P: ", P)
+            # print("traces[:,u] ", traces[:,u])
             coefs.append(beta)
             E = np.dot(M, beta)
 
@@ -94,7 +97,7 @@ def lraAES(data, traces, sBox):
 
     ### 3. compute Rsquared
     R2 = 1 - SSreg / SStot[None, :]
-    pritn(R2)
+    return R2
 
 
 def infoMatrixDemensions(A):
@@ -130,6 +133,14 @@ def printTrace(npzTrace, numTrace=0):
 #     for i in range(5):
 #         b[i] = '{:08b}'.format(a[i])
 
+def basisModelSingleBits(x):
+    g = []
+    for i in range(0, 8):
+        bit = (x >> i) & 1  # this is the definition: gi = [bit i of x]
+        g.append(bit)
+    g.append(1)
+    return g
+
 def leakageModel2(x):
     g = []
     for i in range(0, 2):
@@ -159,6 +170,38 @@ def Rsquare(y, x):
     Rsq = 1 - (SSres/SStot)
     print(Rsq)
 
+def BetaCalc( data, traces):
+    print("data", data)
+    print("traces: ", traces)
+    print("t:", traces[:,0])
+    print("t:", len(traces[:,0]))
+    print(np.mean(traces[:,0]))
+    SStot = np.sum((traces[:,0] - np.mean(traces[:,0])) ** 2)
+    print("Stot:", SStot)
+    keyByte = np.uint8(14)
+    sBoxOut = sbox[data ^ keyByte]
+
+    X = list(map(basisModelSingleBits, sBoxOut))
+
+    Xnp = np.empty((TRACES_NUMBER,2)) # Sum of Squares due to regression
+    print("X", X)
+    X = np.asarray(X)
+    print("Xnp", X)
+    print("Xnp", X.T)
+    leva = np.dot(X.T, X)
+    leva = np.linalg.inv(leva)
+    desna = np.dot(X.T, traces[:, 0])
+    beta = np.dot(leva, desna)
+    print("beta: ", beta)
+    print(traces)
+    print(desna) 
+    print(leva)
+    E = np.dot(X, beta)
+    SSreg = np.sum((E - traces[:,0]) ** 2)
+
+    print("SSreg: ", SSreg)
+    R2 = 1 - (SSreg/SStot) 
+    print("R2: ", R2)
 
 infoNpzFile(npzfile)
 # printTrace(npzfile['traces'])
@@ -174,17 +217,24 @@ infoNpzFile(npzfile)
 (numTraces, traceLength) = traces.shape
 CondAver = ConditionalAveragerAesSbox(256, traceLength)
 
-for i in range (0, 200): #200 trace attack
+for i in traceRange: #200 trace attack
     CondAver.addTrace(data[i], traces[i])
 
 
 (avdata, avtraces) = CondAver.getSnapshot()
 print("avr_trace: ", avtraces)
-lraAES(avdata, avtraces, data)
+print("avr_trace: ", len(avtraces[:,0]))
+BetaCalc(avdata, avtraces)
+# R2rtn = lraAES(avdata, avtraces, data)
 
-
-
-# print("HHHH", CondAver)
+# print(R2rtn)
+# R2Peaks = np.max(R2rtn, axis=1) # global maximization
+# LraWinningCandidate = np.argmax(R2Peaks)
+# LraWinningCandidatePeak = np.max(R2Peaks)
+# print(LraWinningCandidatePeak) 
+# print("_"*100)
+#         # LraCorrectCandidateRank = np.count_nonzero(R2Peaks >= R2Peaks[knownKey[SboxNum]])
+# # print("HHHH", CondAver)
 
 # X = list(map(leakageModel2, sBoxOut))
 # A = sm.add_constant(X, prepend=False)
