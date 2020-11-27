@@ -204,6 +204,20 @@ def BetaCalc( data, traces):
     R2 = 1 - (SSreg/SStot)
     print("R2: ", R2)
 
+def getBeta_step1(X):
+    # Equation:
+    # Beta = (X.T * X)^(-1) * (X.T * Y)
+    leva = np.linalg.inv(np.dot(X.T, X))
+    return leva 
+
+def getBeta_step2(X, Y, leva):
+    # Equation:
+    # Beta = (X.T * X)^(-1) * (X.T * Y)
+    desna = np.dot(X.T, Y)
+    beta = np.dot(leva, desna)
+
+    return beta
+
 # getBeta appliedModelData, trace
 def getBeta(X, Y):
     # Equation:
@@ -238,12 +252,12 @@ def attack(data, traces):
 # ATTACK time slices
     # for key in range(0, ALL_POSSIBLE_KEY):
     for key in range(0, ALL_POSSIBLE_KEY):
+        appliedModelData = list(map(basisModelSingleBits, keyDataPredictions[key]))
         for positionTraceSample in range(0, TRACE_LENGTH):
             # print("trace sample : ", positionTraceSample)
             # print(traces[:, positionTraceSample])
             traceToAtt = traces[:, positionTraceSample]
 
-            appliedModelData = list(map(basisModelSingleBits, keyDataPredictions[key]))
             # print("beta in : ", keyDataPredictions[0])
             # print("beta in : ", traceToAtt)
             beta = getBeta(appliedModelData, traceToAtt)
@@ -251,6 +265,40 @@ def attack(data, traces):
             R2res[key, positionTraceSample] = R2
 
     return R2res
+
+def attackFaster(data, traces):
+    # calculate all prediction 
+    keyDataPredictions= []
+    for predictionKey in range(0, ALL_POSSIBLE_KEY):
+        keyByte = np.uint8(predictionKey)
+        # print("key: ", keyByte)
+        sBoxOut = sbox[data ^ keyByte]
+        keyDataPredictions.append(sBoxOut)
+    # print(keyDataPredictions)
+
+    R2res= np.empty((256, TRACE_LENGTH)) # Sum of Squares due to regression
+# ATTACK time slices
+    # for key in range(0, ALL_POSSIBLE_KEY):
+    for key in range(0, ALL_POSSIBLE_KEY):
+        appliedModelData = list(map(basisModelSingleBits, keyDataPredictions[key]))
+        X = np.asarray(appliedModelData)
+        step1_beta = getBeta_step1(X)
+        print(key)
+        for positionTraceSample in range(0, TRACE_LENGTH):
+            # print("trace sample : ", positionTraceSample)
+            # print(traces[:, positionTraceSample])
+            traceToAtt = traces[:, positionTraceSample]
+
+            # print("beta in : ", keyDataPredictions[0])
+            # print("beta in : ", traceToAtt)
+            beta = getBeta_step2(X, traceToAtt, step1_beta)
+            R2 = calcRsquare(traceToAtt, appliedModelData, beta)
+            R2res[key, positionTraceSample] = R2
+
+    return R2res
+
+
+
 infoNpzFile(npzfile)
 # printTrace(npzfile['traces'])
 
@@ -271,9 +319,7 @@ for i in traceRange: #200 trace attack
 print("avr_trace: ", avtraces)
 print("avr_trace: ", len(avtraces[:,0]))
 # BetaCalc(avdata, avtraces)
-lraAES(avdata, avtraces, 0)
-sys.exit()
-rez = attack(avdata, avtraces)
+rez = attackFaster(avdata, avtraces)
 maxLine = np.amax(rez, axis=1)
 LraWinningCandidate = np.argmax(maxLine)
 LraWinningCandidatePeak = np.max(maxLine)
