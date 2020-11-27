@@ -13,8 +13,9 @@ TRACE_LENGTH = 1000 ## number of samples
 TRACE_STARTING_SAMPLE = 800
 offset = 0
 KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
+ALL_POSSIBLE_KEY = int("0xff", 16)
 
-# for faster calculation 
+# = 255 for faster calculation 
 sbox = np.load('data/aessbox.npy')
 
 traceRange = range(0, TRACES_NUMBER)
@@ -29,7 +30,7 @@ foldl = lambda func, acc, xs: functools.reduce(func, xs, acc)
 
 def mean(vecArr):
     sumArr = foldl(operator.sub, 0, vecArr)
-    return sumArr/vecArr.size
+    return sumArr / vecArr.size
 
 def tr(A):
     return [[row[i] for row in A] for i in range(len(A[0]))]
@@ -40,7 +41,7 @@ def lraAES(data, traces, sBox):
         oneTrs = traces.T[i]
         yi_mean = mean(oneTrs)
         sum_samples = 0
-        for sample in oneTrs: 
+        for sample in oneTrs:
             sum_samples = sum_samples + ((abs(sample) - yi_mean) ** 2)
         finArr.append(sum_samples)
     print(finArr)
@@ -171,14 +172,15 @@ def Rsquare(y, x):
     print(Rsq)
 
 def BetaCalc( data, traces):
+    sample  = 225
     print("data", data)
     print("traces: ", traces)
-    print("t:", traces[:,0])
-    print("t:", len(traces[:,0]))
+    print("t:", traces[:,sample])
+    print("t:", len(traces[:,sample]))
     print(np.mean(traces[:,0]))
-    SStot = np.sum((traces[:,0] - np.mean(traces[:,0])) ** 2)
+    SStot = np.sum((traces[:,sample] - np.mean(traces[:,sample])) ** 2)
     print("Stot:", SStot)
-    keyByte = np.uint8(14)
+    keyByte = np.uint8(KNOW_KEY[SboxNum])
     sBoxOut = sbox[data ^ keyByte]
 
     X = list(map(basisModelSingleBits, sBoxOut))
@@ -190,29 +192,77 @@ def BetaCalc( data, traces):
     print("Xnp", X.T)
     leva = np.dot(X.T, X)
     leva = np.linalg.inv(leva)
-    desna = np.dot(X.T, traces[:, 0])
+    desna = np.dot(X.T, traces[:, sample])
     beta = np.dot(leva, desna)
     print("beta: ", beta)
     print(traces)
-    print(desna) 
+    print(desna)
     print(leva)
     E = np.dot(X, beta)
-    SSreg = np.sum((E - traces[:,0]) ** 2)
+    SSreg = np.sum((E - traces[:,sample]) ** 2)
 
     print("SSreg: ", SSreg)
-    R2 = 1 - (SSreg/SStot) 
+    R2 = 1 - (SSreg/SStot)
     print("R2: ", R2)
 
+def getBeta(appliedModelData, trace):
+    # Equation:
+    # Beta = (X.T * X)^(-1) * (X.T * Y)
+    Y = trace
+    X = appliedModelData
+
+    X = np.asarray(appliedModelData)
+    leva = np.dot(X.T, X)
+    leva = np.linalg.inv(leva)
+    desna = np.dot(X.T, Y)
+    beta = np.dot(leva, desna)
+
+    return beta
+
+def calcRsquare(timeSliceTrace, appliedModelData, beta):
+    SStot = np.sum((timeSliceTrace - np.mean(timeSliceTrace)) ** 2)
+    E = np.dot(appliedModelData, beta)
+    SSreg = np.sum((E - timeSliceTrace) ** 2)
+    R2 = 1 - (SSreg/SStot)
+    return R2
+
+def attack(data, traces):
+
+    # calculate all prediction 
+    keyDataPredictions= []
+    for predictionKey in range(0, ALL_POSSIBLE_KEY):
+        keyByte = np.uint8(predictionKey)
+        # print("key: ", keyByte)
+        sBoxOut = sbox[data ^ keyByte]
+        keyDataPredictions.append(sBoxOut)
+    # print(keyDataPredictions)
+
+    R2res= np.empty((256, TRACE_LENGTH)) # Sum of Squares due to regression
+# ATTACK time slices
+    # for key in range(0, ALL_POSSIBLE_KEY):
+    for key in range(0, 3):
+        print(key)
+        for positionTraceSample in range(0, TRACE_LENGTH):
+            # print("trace sample : ", positionTraceSample)
+            # print(traces[:, positionTraceSample])
+            traceToAtt = traces[:, positionTraceSample]
+
+            appliedModelData = list(map(basisModelSingleBits, keyDataPredictions[key]))
+            # print("beta in : ", keyDataPredictions[0])
+            # print("beta in : ", traceToAtt)
+            beta = getBeta(appliedModelData, traceToAtt)
+            R2 = calcRsquare(traceToAtt, appliedModelData, beta)
+            R2res[key, positionTraceSample] = R2
+
+    return R2res
 infoNpzFile(npzfile)
 # printTrace(npzfile['traces'])
-
 
 #build prediction
 # keyByte = np.uint8(KNOW_KEY[0])
 # sBoxOut = sbox[loadData ^ keyByte]
 # print("loadData: ", loadData)
 # print("sBoxOut: ", sBoxOut)
-
 
 (numTraces, traceLength) = traces.shape
 CondAver = ConditionalAveragerAesSbox(256, traceLength)
@@ -224,9 +274,25 @@ for i in traceRange: #200 trace attack
 (avdata, avtraces) = CondAver.getSnapshot()
 print("avr_trace: ", avtraces)
 print("avr_trace: ", len(avtraces[:,0]))
-BetaCalc(avdata, avtraces)
-# R2rtn = lraAES(avdata, avtraces, data)
+# BetaCalc(avdata, avtraces)
+rez = attack(avdata, avtraces)
+maxLine = np.amax(rez, axis=1)
+LraWinningCandidate = np.argmax(maxLine)
+LraWinningCandidatePeak = np.max(maxLine)
+MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
+MaxSample = np.where(rez == LraWinningCandidatePeak)[0]
+print(MaxVKey)
+print(MaxSample)
+print(rez)
+print("maxLine: ", maxLine)
+print("LRA: ", LraWinningCandidate)
+print("LRAPeak: ", LraWinningCandidatePeak)
+plt.scatter(list(range(0,TRACE_LENGTH)), rez[2,:], color='red') # plotting the observation line
 
+
+plt.xlabel("Years of experience") # adding the name of x-axis
+plt.ylabel("Salaries") # adding the name of y-axis
+plt.show() # specifies end of graph
 # print(R2rtn)
 # R2Peaks = np.max(R2rtn, axis=1) # global maximization
 # LraWinningCandidate = np.argmax(R2Peaks)
