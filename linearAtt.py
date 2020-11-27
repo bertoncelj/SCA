@@ -15,7 +15,7 @@ offset = 0
 KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
 ALL_POSSIBLE_KEY = int("0xff", 16)
 
-# = 255 for faster calculation 
+# For faster calculation 
 sbox = np.load('data/aessbox.npy')
 
 traceRange = range(0, TRACES_NUMBER)
@@ -25,7 +25,6 @@ npzfile = np.load('traces/swaes_atmega_power.trs.npz')
 data = npzfile['data'][:, SboxNum]
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
 
-print(traces)
 foldl = lambda func, acc, xs: functools.reduce(func, xs, acc)
 
 def mean(vecArr):
@@ -61,7 +60,7 @@ def lraAES(data, traces, sBox):
 
     # per-keycandidate loop
     for k in np.arange(0, 64, dtype='uint8'):
-
+        print(k)
         keyByte = np.uint8(k)
         sBoxOut = sbox[data ^ keyByte]
         X = list(map(leakageModel2, sBoxOut))
@@ -205,15 +204,13 @@ def BetaCalc( data, traces):
     R2 = 1 - (SSreg/SStot)
     print("R2: ", R2)
 
-def getBeta(appliedModelData, trace):
+# getBeta appliedModelData, trace
+def getBeta(X, Y):
     # Equation:
     # Beta = (X.T * X)^(-1) * (X.T * Y)
-    Y = trace
-    X = appliedModelData
+    X = np.asarray(X)
 
-    X = np.asarray(appliedModelData)
-    leva = np.dot(X.T, X)
-    leva = np.linalg.inv(leva)
+    leva = np.linalg.inv(np.dot(X.T, X))
     desna = np.dot(X.T, Y)
     beta = np.dot(leva, desna)
 
@@ -240,8 +237,7 @@ def attack(data, traces):
     R2res= np.empty((256, TRACE_LENGTH)) # Sum of Squares due to regression
 # ATTACK time slices
     # for key in range(0, ALL_POSSIBLE_KEY):
-    for key in range(0, 3):
-        print(key)
+    for key in range(0, ALL_POSSIBLE_KEY):
         for positionTraceSample in range(0, TRACE_LENGTH):
             # print("trace sample : ", positionTraceSample)
             # print(traces[:, positionTraceSample])
@@ -275,6 +271,8 @@ for i in traceRange: #200 trace attack
 print("avr_trace: ", avtraces)
 print("avr_trace: ", len(avtraces[:,0]))
 # BetaCalc(avdata, avtraces)
+lraAES(avdata, avtraces, 0)
+sys.exit()
 rez = attack(avdata, avtraces)
 maxLine = np.amax(rez, axis=1)
 LraWinningCandidate = np.argmax(maxLine)
@@ -289,138 +287,8 @@ print("LRA: ", LraWinningCandidate)
 print("LRAPeak: ", LraWinningCandidatePeak)
 plt.scatter(list(range(0,TRACE_LENGTH)), rez[2,:], color='red') # plotting the observation line
 
-
 plt.xlabel("Years of experience") # adding the name of x-axis
 plt.ylabel("Salaries") # adding the name of y-axis
 plt.show() # specifies end of graph
-# print(R2rtn)
-# R2Peaks = np.max(R2rtn, axis=1) # global maximization
-# LraWinningCandidate = np.argmax(R2Peaks)
-# LraWinningCandidatePeak = np.max(R2Peaks)
-# print(LraWinningCandidatePeak) 
-# print("_"*100)
-#         # LraCorrectCandidateRank = np.count_nonzero(R2Peaks >= R2Peaks[knownKey[SboxNum]])
-# # print("HHHH", CondAver)
 
-# X = list(map(leakageModel2, sBoxOut))
-# A = sm.add_constant(X, prepend=False)
-
-# infoMatrixDemensions(traces)
-# infoMatrixDemensions(A)
-# infoMatrixDemensions(X)
-# print(A)
-# results = sm.OLS(traces, X).fit() # the OLS itself
-# betaOLS = results.params 
-# print(results.summary())
-
-'''
-dataset = pd.read_csv('Salary_Data.csv')
-print(dataset.head())
-X = dataset["Salary"]
-print("data: ", X[:])
-
-# X = dataset.iloc[:,:-1].values #indpnedet variable array
-Y = dataset.iloc[:,:1].values  #dependent variable array
-print("X: ", X)
-print("Y: ", Y)
-print("X len: ",  len(X))
-print("Y len: ",  len(Y))
-X_new = []
-for x in X:
-    X_new.append(x)
-print(X_new)
-
-X = np.array([X_new])
-X = X.T
-Y = np.array(Y)
-
-print("X: ", X)
-print("Y: ", Y)
-Rsquare(Y, X)
-
-dummy = np.ones(len(X))
-dummy = dummy.astype('float64')
-print(dummy.dtype)
-print(X.dtype)
-
-print("X: ", X.ravel())
-print("dummy: ", dummy)
-
-
-# X= np.hstack((np.atleast_2d(dummy).T, X))
-
-X = sm.add_constant(X, prepend=False) # add constant coefficient (trailing column of ones)
-M = X
-P = np.dot(np.linalg.inv(np.dot(M.T, M)), M.T)
-
-beta = np.dot(P, Y)
-print("FINAL BETA: ", beta)
-
-
-print("-"*30, "OLS")
-
-print("X: ", X)
-print("Y: ", Y)
-
-results = sm.OLS(Y, X).fit() # the OLS itself
-betaOLS = results.params 
-print(results.summary())
-
-print("beta OLS: ", betaOLS)
-
-# X= np.hstack((np.atleast_2d(dummy).T, X))
-print(X)
-xsi = np.dot(X.T, X)
-print(xsi)
-leva = np.linalg.inv(xsi)
-print(leva)
-desna = np.dot(X.T, Y)
-print(desna)
-beta = np.dot(leva, desna)
-
-print("beta:", beta)
-x_mean = np.mean(X)
-y_mean = np.mean(Y)
-
-SSxy=0
-for i in range(0,len(X)):
-    SSxy = SSxy + (Y[i]*X[i]-len(X)*x_mean*y_mean)
-print(SSxy)
-SSxx=0
-for i in range(0,len(X)):
-    SSxx = SSxx + ((X[i]**2)-len(X)*x_mean**2)
-
-print(SSxx)
-
-B1 = SSxy/SSxx
-B0 = y_mean - B1*x_mean
-print("B1:", B1)
-print("B0:", B0)
-print("betaOLS0:", betaOLS[1])
-print("betaOLS1:", betaOLS[0])
-
-
-y_rez1 = []
-for i in X[:,0]:
-    print("i:", i)
-    y_rez1.append(B1*i+B0)
-
-y_rez2 = []
-for i in range(0,len(X[:,0])):
-    y_rez2.append(betaOLS[0]*i+betaOLS[1])
-
-print("X len:", len(X[:,0]))
-print(len(y_rez1))
-print(len(y_rez2))
-print("X[:,0]", X[:,0])
-print("y_rez1:", y_rez1)
-plt.scatter(X[:,0], Y, color='red') # plotting the observation line
-plt.scatter(X[:,0], y_rez1[:,0])
-plt.scatter(X[:,0], y_rez2, color='green')
-
-
-plt.xlabel("Years of experience") # adding the name of x-axis
-plt.ylabel("Salaries") # adding the name of y-axis
-plt.show() # specifies end of graph
-'''
 
