@@ -270,6 +270,20 @@ def lraAES(data, traces, intermediateFunction, basisFunctionsModel):
 # mozn da mam napko v attackMoreMoreFast
 # probi lraAES
 
+def printWinningKey(R2outputs, correctKey):
+    maxLine = np.amax(R2outputs, axis=1)
+
+    LraWinningCandidate = hex(np.argmax(maxLine))
+    LraWinningCandidatePeak = np.max(maxLine)
+    MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
+    MaxSample = np.where(R2outputs == LraWinningCandidatePeak)[0]
+    print(MaxVKey)
+    print(MaxSample)
+    print("Winning candidate: ", LraWinningCandidate)
+    print("Correct key: ", hex(correctKey))
+
+    print("R2 Peak: ", LraWinningCandidatePeak)
+
 def analyzeTool_top5(R2outputs):
     print(R2outputs)
 
@@ -283,7 +297,8 @@ def analyzeTool_top5(R2outputs):
 
     print("maxLine: ", maxLine)
     print("result_args: ", result_args)
-    print("result: ", result) 
+    print("result: ", result)
+
     LraWinningCandidate = hex(np.argmax(maxLine))
     LraWinningCandidatePeak = np.max(maxLine)
     MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
@@ -294,5 +309,59 @@ def analyzeTool_top5(R2outputs):
     print("LRA: ", LraWinningCandidate)
     print("LRAPeak: ", LraWinningCandidatePeak)
 
+def getKeyLocationOnTrace(R2outputs, traces):
+    # N -> number of maximums
+    N=1
+    maxLine = np.amax(R2outputs, axis=1)
 
+    temp = np.argpartition(-maxLine, N)
+    result_args = temp[:N]
+
+    temp = np.partition(-maxLine, N)
+    result = -temp[:N]
+
+    correctTrace = R2outputs[result_args,:][0]
+
+    # get sample and value
+    correctTracePosition = np.where(correctTrace== result)[0]
+    # ERROR value is wrog, cuz we always take 0 trace
+    correctTraceSample = traces[0, correctTracePosition]
+
+    return (correctTracePosition.item(), correctTraceSample.item())
+
+def displayR2WinningKeys(R2outputs, knowKey, SboxNum):
+    maxLine = np.amax(R2outputs, axis=1)
+
+    LraWinCandidate = np.argmax(maxLine)
+    LraWinningCandidatePeak = np.max(maxLine)
+
+
+    plt.plot(R2outputs.T, color='gray')
+
+    if LraWinCandidate != knowKey[SboxNum]:
+        plt.plot(R2outputs[LraWinCandidate, :], 'blue')
+
+    plt.xlabel("samples") # adding the name of x-axis
+    plt.ylabel("R2 values") # adding the name of y-axis
+    plt.plot(R2outputs[knowKey[SboxNum], :], 'red')
+    plt.show()
+
+def displayCorrectKeyOnTrace(traces, point, trace_start_point):
+
+    (numTraces, traceLength) = traces.shape
+    print("numTraces: ,", numTraces)
+    print("traceLength: ,", traceLength)
+    # point
+    yValues = [0] * traceLength
+    yValues[point[0]] = 3
+    # line
+    xSamples = range(0, traceLength)
+    ySamples = traces[0, :]
+    plt.plot(xSamples, ySamples, color='red')
+    plt.plot(point[0], point[1], 'bo')
+
+    plt.xlabel("AvgTraces Samples") # adding the name of x-axis
+    plt.ylabel("Trace value") # adding the name of y-axis
+    plt.grid(True)
+    plt.show() # specifies end of graph
 

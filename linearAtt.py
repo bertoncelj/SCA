@@ -13,19 +13,30 @@ from datetime import datetime
 # print whole np array
 np.set_printoptions(threshold=sys.maxsize)
 
-SboxNum = 1
+####################### CONFIG ############################ 
+SboxNum = 15
 TRACES_NUMBER = 100
-TRACE_LENGTH = 700 ## number of samples
-TRACE_STARTING_SAMPLE = 0
+TRACE_LENGTH = 400 ## number of samples
+TRACE_STARTING_SAMPLE = 1000
 offset = 0
+
 KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
 ALL_POSSIBLE_KEY = int("0xff", 16)
+####################### CONFIG ############################ 
 
+# Load files -> pick out traces and data
 traceRange = range(0, TRACES_NUMBER)
 sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
-# load traces, data
+
 npzfile = np.load('traces/swaes_atmega_power.trs.npz')
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
+
+def saveResultIntoFile(fileName, dataToSave):
+    file = open('fastfast', 'w')
+    file.write(str(rez))
+    file.write('\n')
+    file.close()
+    return True
 
 def infoNpzFile(npzfile):
     allNpzTypes = ('data', 'traces')
@@ -58,36 +69,21 @@ def attakSbox(SboxNum, attackModel):
     for i in traceRange: #200 trace attack
         CondAver.addTrace(data[i], traces[i])
 
-
     (avdata, avtraces) = CondAver.getSnapshot()
 
 # rez = lraAES(avdata, avtraces, SboxNum, basisModelSingleBits)
 
     rez = attackMoreMoreFaster(avdata, avtraces, SboxNum, attackModel)
+    printWinningKey(rez,KNOW_KEY[SboxNum])
+    # displayR2WinningKeys(rez, KNOW_KEY, SboxNum)
 
-    # file = open('fastfast', 'w')
-    # file.write(str(rez))
-    # file.write('\n')
-    # file.close()
-    analyzeTool_top5(rez)
+    # analyzeTool_top5(rez)
+    corrPoint = getKeyLocationOnTrace(rez, avtraces)
+    print("Point: ", corrPoint)
+    # displayCorrectKeyOnTrace(avtraces, corrPoint, TRACE_STARTING_SAMPLE)
 
-    sys.exit()
-    int_LraWinCandidate = int(LraWinningCandidate, 16)
-    plt.plot(rez.T, color='gray')
-    print("key correct: ", KNOW_KEY[SboxNum])
-    print("key candidate: ", int_LraWinCandidate)
-
-    if int_LraWinCandidate != KNOW_KEY[SboxNum]:
-        plt.plot(rez[int_LraWinCandidate, :], 'blue')
-        pass
-
-# plt.xlabel("Years of experience") # adding the name of x-axis
-# plt.ylabel("Salaries") # adding the name of y-axis
-    plt.plot(rez[KNOW_KEY[SboxNum], :], 'r')
-    plt.show()
-
-
-    return  (LraWinningCandidate, LraWinningCandidatePeak)
+    # return  (LraWinningCandidate, LraWinningCandidatePeak)
+    return True
 
 # startTime = datetime.now()
 # keyfinal = []
@@ -96,9 +92,7 @@ def attakSbox(SboxNum, attackModel):
 # print(keyfinal)
 # print("TIME: ", datetime.now()- startTime)
 
-attackModel = basisModelHW
-attakSbox(2, attackModel)
-
-
-
+# printTrace(traces)
+attackModel = basisModelSingleBits
+attakSbox(SboxNum, attackModel)
 
