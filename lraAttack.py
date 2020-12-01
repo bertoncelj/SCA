@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from  numpy import linalg as LA
 
+from condaveraes import * # incremental conditional averaging
 TRACE_LENGTH = 0
 
 # For faster calculation 
@@ -277,11 +278,9 @@ def printWinningKey(R2outputs, correctKey):
     LraWinningCandidatePeak = np.max(maxLine)
     MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
     MaxSample = np.where(R2outputs == LraWinningCandidatePeak)[0]
-    print(MaxVKey)
-    print(MaxSample)
+
     print("Winning candidate: ", LraWinningCandidate)
     print("Correct key: ", hex(correctKey))
-
     print("R2 Peak: ", LraWinningCandidatePeak)
 
 def analyzeTool_top5(R2outputs):
@@ -364,4 +363,3 @@ def displayCorrectKeyOnTrace(traces, point, trace_start_point):
     plt.ylabel("Trace value") # adding the name of y-axis
     plt.grid(True)
     plt.show() # specifies end of graph
-
