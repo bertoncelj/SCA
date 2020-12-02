@@ -284,29 +284,50 @@ def printWinningKey(R2outputs, correctKey):
     print("R2 Peak: ", LraWinningCandidatePeak)
 
 def analyzeTool_top5(R2outputs):
-    print(R2outputs)
-
     maxLine = np.amax(R2outputs, axis=1)
-    test = maxLine
-    temp = np.argpartition(-test, 4)
-    result_args = temp[:4]
 
-    temp = np.partition(-test, 4)
-    result = -temp[:4]
+    # get max, but return positons from array
+    temp = np.argpartition(-maxLine, 5)
+    arrayPositions = temp[:5]
 
-    print("maxLine: ", maxLine)
-    print("result_args: ", result_args)
-    print("result: ", result)
+    # get max, but return value from array
+    temp = np.partition(-maxLine, 5)
+    arrayValues = -temp[:5]
+    arrayHexKeys = list(map(hex,arrayPositions))
+    top5PairsHex = list(sorted(zip(arrayValues, arrayHexKeys),
+                               key=lambda x:x[0], reverse=True))
 
-    LraWinningCandidate = hex(np.argmax(maxLine))
-    LraWinningCandidatePeak = np.max(maxLine)
-    MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
-    MaxSample = np.where(rez == LraWinningCandidatePeak)[0]
-    print(MaxVKey)
-    print(MaxSample)
-    print("maxLine: ", maxLine)
-    print("LRA: ", LraWinningCandidate)
-    print("LRAPeak: ", LraWinningCandidatePeak)
+    print("top 5 rezults: ", top5PairsHex)
+    return top5PairsHex
+
+def dispayTop5(pairsTuplesMaxs):
+
+    maxR2Values   = [val for val, pos in pairsTuplesMaxs]
+    maxHexKeys    = [pos for val, pos in pairsTuplesMaxs]
+    print("R2: ", maxR2Values)
+    print("Max Keys: ", maxHexKeys)
+
+    x_axis = list(range(1, len(maxR2Values)+1))
+    print(x_axis)
+    maxHexKeysStr = list(map(str, maxHexKeys))
+
+    # histogram
+    plt.bar(x_axis, maxR2Values, tick_label=maxHexKeysStr,
+            color =['red', 'green'])
+    plt.xlabel("Num of R2 results")
+    plt.ylabel("R2 values")
+    plt.title("R2 values")
+    plt.show()
+
+    # LraWinningCandidate = hex(np.argmax(maxLine))
+    # LraWinningCandidatePeak = np.max(maxLine)
+    # MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
+    # MaxSample = np.where(R2outputs == LraWinningCandidatePeak)[0]
+    # print(MaxVKey)
+    # print(MaxSample)
+    # print("maxLine: ", maxLine)
+    # print("LRA: ", LraWinningCandidate)
+    # print("LRAPeak: ", LraWinningCandidatePeak)
 
 def getKeyLocationOnTrace(R2outputs, traces):
     # N -> number of maximums
@@ -363,3 +384,5 @@ def displayCorrectKeyOnTrace(traces, point, trace_start_point):
     plt.ylabel("Trace value") # adding the name of y-axis
     plt.grid(True)
     plt.show() # specifies end of graph
+
+

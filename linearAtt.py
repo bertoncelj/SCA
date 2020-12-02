@@ -67,6 +67,8 @@ def printTrace(npzTrace, numTrace=0):
 def attackSbox(avgData, avgTraces, SboxNum, attackModel):
 
     rez = attackMoreMoreFaster(avgData, avgTraces, SboxNum, attackModel)
+    maxPairs = analyzeTool_top5(rez)
+    dispayTop5(maxPairs)
     printWinningKey(rez,KNOW_KEY[SboxNum])
     # displayR2WinningKeys(rez, KNOW_KEY, SboxNum)
 
