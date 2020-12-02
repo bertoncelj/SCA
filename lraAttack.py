@@ -39,8 +39,8 @@ def basisModelHW(x):
 def getBeta_step1(X):
     # Equation:
     # Beta = (X.T * X)^(-1) * (X.T * Y)
-    leva = np.linalg.inv(np.dot(X.T, X))
-    return leva 
+    left = np.linalg.inv(np.dot(X.T, X))
+    return left
 
 def getBeta_step2(X, Y, leva):
     # Equation:
@@ -300,35 +300,6 @@ def analyzeTool_top5(R2outputs):
     print("top 5 rezults: ", top5PairsHex)
     return top5PairsHex
 
-def dispayTop5(pairsTuplesMaxs):
-
-    maxR2Values   = [val for val, pos in pairsTuplesMaxs]
-    maxHexKeys    = [pos for val, pos in pairsTuplesMaxs]
-    print("R2: ", maxR2Values)
-    print("Max Keys: ", maxHexKeys)
-
-    x_axis = list(range(1, len(maxR2Values)+1))
-    print(x_axis)
-    maxHexKeysStr = list(map(str, maxHexKeys))
-
-    # histogram
-    plt.bar(x_axis, maxR2Values, tick_label=maxHexKeysStr,
-            color =['red', 'green'])
-    plt.xlabel("Num of R2 results")
-    plt.ylabel("R2 values")
-    plt.title("R2 values")
-    plt.show()
-
-    # LraWinningCandidate = hex(np.argmax(maxLine))
-    # LraWinningCandidatePeak = np.max(maxLine)
-    # MaxVKey = np.where(maxLine == LraWinningCandidatePeak)[0]
-    # MaxSample = np.where(R2outputs == LraWinningCandidatePeak)[0]
-    # print(MaxVKey)
-    # print(MaxSample)
-    # print("maxLine: ", maxLine)
-    # print("LRA: ", LraWinningCandidate)
-    # print("LRAPeak: ", LraWinningCandidatePeak)
-
 def getKeyLocationOnTrace(R2outputs, traces):
     # N -> number of maximums
     N=1
@@ -348,6 +319,25 @@ def getKeyLocationOnTrace(R2outputs, traces):
     correctTraceSample = traces[0, correctTracePosition]
 
     return (correctTracePosition.item(), correctTraceSample.item())
+
+def dispayTop5(pairsTuplesMaxs):
+
+    maxR2Values   = [val for val, pos in pairsTuplesMaxs]
+    maxHexKeys    = [pos for val, pos in pairsTuplesMaxs]
+    print("R2: ", maxR2Values)
+    print("Max Keys: ", maxHexKeys)
+
+    x_axis = list(range(1, len(maxR2Values)+1))
+    print(x_axis)
+    maxHexKeysStr = list(map(str, maxHexKeys))
+
+    # histogram
+    plt.bar(x_axis, maxR2Values, tick_label=maxHexKeysStr,
+            color =['red', 'green'])
+    plt.xlabel("Num of R2 results")
+    plt.ylabel("R2 values")
+    plt.title("R2 values")
+    plt.show()
 
 def displayR2WinningKeys(R2outputs, knowKey, SboxNum):
     maxLine = np.amax(R2outputs, axis=1)

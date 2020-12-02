@@ -17,13 +17,13 @@ np.set_printoptions(threshold=sys.maxsize)
     # Why does offset in traces fuck up everythink?
 
 ####################### CONFIG ############################ 
-SboxNum = 1
-TRACES_NUMBER = 100
+SboxNum = 0
+TRACES_NUMBER = 300
 TRACE_LENGTH = 400 ## number of samples
 TRACE_STARTING_SAMPLE = 1000
 offset = 0
-traceRoundNumber=30
-
+traceRoundNumber=50
+PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
 KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
 ALL_POSSIBLE_KEY = int("0xff", 16)
 ####################### CONFIG ############################ 
@@ -32,9 +32,39 @@ ALL_POSSIBLE_KEY = int("0xff", 16)
 traceRange = range(0, TRACES_NUMBER)
 sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
 
-npzfile = np.load('traces/swaes_atmega_power.trs.npz')
+npzfile = np.load('aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz')
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
 data = npzfile['data'][:, SboxNum]
+
+
+def findLastUnderScore(num, last):
+    num = PATH_TRACE.find("_",num)
+    if num == -1:
+        return last
+    else:
+        last = num
+        return findLastUnderScore(num+1, last)
+
+def getCorrectKeyByName(name):
+    cpFrom = findLastUnderScore(0,0)+1
+    cpTo = PATH_TRACE.find(".trs")
+
+    keyStr = str(PATH_TRACE[cpFrom:cpTo])
+    tupKey = (list(zip(keyStr[::2], keyStr[1::2])))
+    nn = [x[0]+x[1] for x in tupKey]
+    print(nn)
+    stToHex = lambda x: hex(int(x,16))
+    stToInt = lambda x: int(x,16)
+    keyHex = list(map(stToHex , nn))
+    keyInt = list(map(stToInt , nn))
+    KNOW_KEY = keyHex
+    knownKey = np.array(keyInt, dtype="uint8")
+
+    print("Know key: ", knownKey)
+    return knownKey
+
+
+
 
 def saveResultIntoFile(fileName, dataToSave):
     file = open('fastfast', 'w')
@@ -70,11 +100,11 @@ def attackSbox(avgData, avgTraces, SboxNum, attackModel):
     maxPairs = analyzeTool_top5(rez)
     dispayTop5(maxPairs)
     printWinningKey(rez,KNOW_KEY[SboxNum])
-    # displayR2WinningKeys(rez, KNOW_KEY, SboxNum)
+    displayR2WinningKeys(rez, KNOW_KEY, SboxNum)
 
     # analyzeTool_top5(rez)
-    corrPoint = getKeyLocationOnTrace(rez, avgTraces)
-    print("Point: ", corrPoint)
+    # corrPoint = getKeyLocationOnTrace(rez, avgTraces)
+    # print("Point: ", corrPoint)
     # displayCorrectKeyOnTrace(avtraces, corrPoint, TRACE_STARTING_SAMPLE)
 
     # return  (LraWinningCandidate, LraWinningCandidatePeak)
@@ -113,7 +143,8 @@ def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):
 
 ########## START ##########
 if __name__== "__main__":
-
+    getCorrectKeyByName(PATH_TRACE)
+    infoNpzFile(npzfile)
     attackAESinRounds(data, traces, traceRoundNumber , TRACES_NUMBER, SboxNum)
     sys.exit()
 
