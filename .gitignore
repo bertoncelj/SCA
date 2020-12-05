@@ -6,6 +6,7 @@ __pycache__/
 # VIM
 *~
 *.swp
+*.swo
 *.un
 
 

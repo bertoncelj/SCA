@@ -12,27 +12,39 @@ from datetime import datetime
 
 # print whole np array
 np.set_printoptions(threshold=sys.maxsize)
+
 # Questions :
     # Why does data[:, SboxNum] takes all N of traces but traces dont?
     # Why does offset in traces fuck up everythink?
 
 ####################### CONFIG ############################ 
 SboxNum = 0
-TRACES_NUMBER = 300
+TRACES_NUMBER = 50
 TRACE_LENGTH = 400 ## number of samples
-TRACE_STARTING_SAMPLE = 1000
+TRACE_STARTING_SAMPLE = 0
 offset = 0
 traceRoundNumber=50
-PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
-KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
+# PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
+# PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
+
+KNOW_KEY = b''
 ALL_POSSIBLE_KEY = int("0xff", 16)
+
+# PATH_TRACE="aes256_sb_ciph_be947018518aadeccacd0a94a3057a90c29eae7296a5ee0850e9de3db91e7d83.trs.npz"
+# PATH_TRACE="traces/aes192_sb_ciph_ec40554bf67c9655d85cfd69ac04012f7ee1340ccf7b24fd.trs.npz"
+PATH_TRACE="aestraces/aes128_sb_eqinvciph_f50f5782bac97baabdbe69c6cf94d2e2.trs.npz"
+
+
+# KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
+# PATH_TRACE="aes_atmega_power.trs.npz"
+
 ####################### CONFIG ############################ 
 
 # Load files -> pick out traces and data
 traceRange = range(0, TRACES_NUMBER)
 sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
 
-npzfile = np.load('aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz')
+npzfile = np.load(PATH_TRACE)
 traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
 data = npzfile['data'][:, SboxNum]
 
@@ -61,10 +73,8 @@ def getCorrectKeyByName(name):
     knownKey = np.array(keyInt, dtype="uint8")
 
     print("Know key: ", knownKey)
+    # return keyHex
     return knownKey
-
-
-
 
 def saveResultIntoFile(fileName, dataToSave):
     file = open('fastfast', 'w')
@@ -100,7 +110,7 @@ def attackSbox(avgData, avgTraces, SboxNum, attackModel):
     maxPairs = analyzeTool_top5(rez)
     dispayTop5(maxPairs)
     printWinningKey(rez,KNOW_KEY[SboxNum])
-    displayR2WinningKeys(rez, KNOW_KEY, SboxNum)
+    displayR2WinningKeys(rez, KNOW_KEY[SboxNum])
 
     # analyzeTool_top5(rez)
     # corrPoint = getKeyLocationOnTrace(rez, avgTraces)
@@ -143,7 +153,7 @@ def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):
 
 ########## START ##########
 if __name__== "__main__":
-    getCorrectKeyByName(PATH_TRACE)
+    KNOW_KEY = getCorrectKeyByName(PATH_TRACE)
     infoNpzFile(npzfile)
     attackAESinRounds(data, traces, traceRoundNumber , TRACES_NUMBER, SboxNum)
     sys.exit()

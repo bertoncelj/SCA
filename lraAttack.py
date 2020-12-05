@@ -324,36 +324,39 @@ def dispayTop5(pairsTuplesMaxs):
 
     maxR2Values   = [val for val, pos in pairsTuplesMaxs]
     maxHexKeys    = [pos for val, pos in pairsTuplesMaxs]
+
     print("R2: ", maxR2Values)
     print("Max Keys: ", maxHexKeys)
 
     x_axis = list(range(1, len(maxR2Values)+1))
-    print(x_axis)
     maxHexKeysStr = list(map(str, maxHexKeys))
 
     # histogram
     plt.bar(x_axis, maxR2Values, tick_label=maxHexKeysStr,
-            color =['red', 'green'])
+            color =['red', 'blue'])
     plt.xlabel("Num of R2 results")
     plt.ylabel("R2 values")
     plt.title("R2 values")
     plt.show()
 
-def displayR2WinningKeys(R2outputs, knowKey, SboxNum):
-    maxLine = np.amax(R2outputs, axis=1)
+def displayR2WinningKeys(R2outputs, knowKey):
 
-    LraWinCandidate = np.argmax(maxLine)
-    LraWinningCandidatePeak = np.max(maxLine)
+    getHighestR2Line = np.amax(R2outputs, axis=1)
+    winningCandidateR2 = np.argmax(getHighestR2Line)
 
+    # legend display
+    legendTextCorrKey = "Correct key: " + str(hex(knowKey))
+    legendTextPredKey = "Predction key: " + str(hex(winningCandidateR2))
 
     plt.plot(R2outputs.T, color='gray')
 
-    if LraWinCandidate != knowKey[SboxNum]:
-        plt.plot(R2outputs[LraWinCandidate, :], 'blue')
+    if winningCandidateR2 != knowKey:
+        plt.plot(R2outputs[winningCandidateR2, :], 'blue', label=legendTextCorrKey)
 
+    plt.plot(R2outputs[knowKey, :], 'red', label=legendTextPredKey)
     plt.xlabel("samples") # adding the name of x-axis
     plt.ylabel("R2 values") # adding the name of y-axis
-    plt.plot(R2outputs[knowKey[SboxNum], :], 'red')
+    plt.legend()
     plt.show()
 
 def displayCorrectKeyOnTrace(traces, point, trace_start_point):
@@ -374,5 +377,3 @@ def displayCorrectKeyOnTrace(traces, point, trace_start_point):
     plt.ylabel("Trace value") # adding the name of y-axis
     plt.grid(True)
     plt.show() # specifies end of graph
-
-
