@@ -1,12 +1,28 @@
 import mouse
-
 # Importing Libraries
 import serial
 import time
 import random
 import string
 
+import keyboard
+import pyautogui, sys
+from time import sleep
+
 arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=.1)
+
+def reset_cursor():
+    mouse.move(-10000,-10000, absolute=False, duration=0.0)
+
+def clickMouse(x,y):
+    reset_cursor()
+    mouse.move(x,y, absolute=False, duration=0.0)
+
+    sleep(0.1)
+    # mouse.click('left')
+    pyautogui.click(button='left')
+    print(mouse.get_position())
+    sleep(.333)
 
 def writeSerial(x):
     arduino.write(bytes(x, 'utf-8'))
@@ -31,69 +47,56 @@ def generateRandomData():
 def generateRandomNum():
     return "".join([str(random.randint(0,9)) for _ in range(16)])
 
+#Save protocol
+start_file_menu  =(16, 40)
+save_as = (44, 150)
+# outofocus on title
+# change title keyboard
+# change type
+select_type_menu = (954,714)
+cvs_type = (969, 769)
+save_button = (1100, 758)
+
+
+start_trigger = (87, 782)
+write_cursor = (269, 68)
+
+# while True:
+    # print(mouse.get_position())
+    # num = generateRandomNum()
+    # stringToType = "aes_forward_" + num
+    # keyboard.write(stringToType)
+    # time.sleep(2)
+
 while True:
+    mouse.click('left')
+
+    # start
+    reset_cursor()
+
+    print(mouse.get_position())
+
     num = generateRandomNum()
+    # num = "0123456789012345"
+    clickMouse(*start_trigger)
     print("SEND")
     writeSerial(num + "\0")
     readSerial(num + "\0")
     arduino.flush()
-    time.sleep(.005)
 
+    time.sleep(.5)
+    clickMouse(*start_file_menu)
+    clickMouse(*save_as)
+    clickMouse(*write_cursor)
 
-# import keyboard
-# import pyautogui
+# save by data name
+    stringToType = "aes_forward_" + num + "_"
+    pyautogui.typewrite(stringToType)
 
-# from time import sleep
+# change data type
+    clickMouse(*select_type_menu)
+    clickMouse(*cvs_type)
+    clickMouse(*save_button)
 
-# firefox = (33, 58)
-# obs = (31, 826)
-# play = (86, 1061)
-# vu = (156, 68)
-# rp = (392, 72)
-# present = (154, 332)
-# video_duration = 60
-# Crp = (500,75)
+    print("next")
 
-
-# mouse.click('left')
-
-# def reset_cursor():
-#     mouse.move(-10000,-10000, absolute=False, duration=0.0)
-
-# def move_cursor(x,y):
-#     reset_cursor()
-#     mouse.move(x,y, absolute=False, duration=0.0)
-
-#     sleep(0.1)
-#     mouse.click('right')
-#     print(mouse.get_position())
-#     sleep(1)
-
-# while(True):
-    # print(mouse.get_position())
-
-#start
-#reset_cursor()
-
-#move_cursor(*firefox)
-
-##loop start
-#move_cursor(*vu)
-
-
-##presentation
-#move_cursor(154, 332)
-
-##recording window
-#move_cursor(*rp)
-#sleep(10)
-
-
-##playing
-#keyboard.write('s')
-#move_cursor(*play)
-#sleep(video_duration)
-##stop resording
-#keyboard.write('s')
-#move_cursor(*Crp)
-##loop close
