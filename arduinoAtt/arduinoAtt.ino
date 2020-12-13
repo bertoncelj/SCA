@@ -12,6 +12,16 @@ void setup() {
     pinMode(11, OUTPUT); 
 }
 
+void printInputInInt()
+{   
+    int i;
+    for (i=0;i<16;i++){
+        Serial.print((int)data[i]);
+        Serial.print(", ");
+    } 
+    Serial.println("");
+}
+
 void getSerailData()
 {
     String rez;
@@ -26,6 +36,7 @@ void getSerailData()
     } 
     Serial.println(rez);
     rez.toCharArray(data, 20); //16 chars == 16 bytes
+    /* printInputInInt(); */
 }
 
 void loop() {

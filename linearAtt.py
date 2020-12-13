@@ -18,25 +18,27 @@ np.set_printoptions(threshold=sys.maxsize)
     # Why does offset in traces fuck up everythink?
 
 ####################### CONFIG ############################ 
-SboxNum = 0
-TRACES_NUMBER = 50
-TRACE_LENGTH = 400 ## number of samples
+SboxNum =2 
+TRACES_NUMBER = 100
+TRACE_LENGTH = 2800 ## number of samples
 TRACE_STARTING_SAMPLE = 0
 offset = 0
-traceRoundNumber=50
+traceRoundNumber=100
 # PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
-# PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
+
+# PATH_TRACE = "traces/swaes_atmega_power.trs.npz"
 
 KNOW_KEY = b''
 ALL_POSSIBLE_KEY = int("0xff", 16)
 
 # PATH_TRACE="aes256_sb_ciph_be947018518aadeccacd0a94a3057a90c29eae7296a5ee0850e9de3db91e7d83.trs.npz"
 # PATH_TRACE="traces/aes192_sb_ciph_ec40554bf67c9655d85cfd69ac04012f7ee1340ccf7b24fd.trs.npz"
-PATH_TRACE="aestraces/aes128_sb_eqinvciph_f50f5782bac97baabdbe69c6cf94d2e2.trs.npz"
+# PATH_TRACE="aestraces/aes128_sb_eqinvciph_f50f5782bac97baabdbe69c6cf94d2e2.trs.npz"
+# PATH_TRACE="testNpz3.npz"
 
 
 # KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
-# PATH_TRACE="aes_atmega_power.trs.npz"
+PATH_TRACE="traces/swaes_atmega_power.trs.npz"
 
 ####################### CONFIG ############################ 
 
@@ -98,8 +100,8 @@ def printTrace(npzTrace, numTrace=0):
     xSamples = range(0, xLength)
     print("x: ", xSamples)
     ySamples = npzTrace[numTrace, :]
-    plt.plot(xSamples, ySamples, color='red')
 
+    plt.plot(xSamples, ySamples, color='red')
     plt.xlabel("Time") # adding the name of x-axis
     plt.ylabel("Y samples") # adding the name of y-axis
     plt.show() # specifies end of graph
@@ -128,33 +130,44 @@ def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):
     print("getAttR: ", getAttRounds)
 
     (numTraces, traceLength) = traces.shape
-
+    print("numTraces: ", numTraces)
+    print("traceLength: ", traceLength)
     Avg = ConditionalAveragerAesSbox(256, traceLength)
 
     trArr = [x * traceRoundNum for x in range(0,getAttRounds+1)]
-
+    print("trArr: ", trArr)
     tracePairs = list(zip(trArr, trArr[1:]))
-
     for index, span in enumerate(tracePairs):
+        print("index: ", index)
+        print("span: ", span)
         for i in range(span[0], span[1]):
+            # print(i)
+            # print(data[i])
+            # print(traces[i])
             Avg.addTrace(data[i], traces[i])
-
+        
         (avgData, avgTraces) = Avg.getSnapshot()
-        # print("avgData: ", avgData)
-        # print("avgTraces: ", avgTraces)
+        print("avgData: ", avgData)
+        print("avgData len: ", len(avgData))
+        print("avgTraces: ", avgTraces)
         print("")
         print("#"*20)
         print("(" , index+1,"/",len(trArr),") Attack by blocks")
         print("Trace attack to: N = ", span[1])
 
-        attackModel = basisModelSingleBits
+        # attackModel = basisModelSingleBits
+        attackModel = basisModelHW
         attackSbox(avgData, avgTraces, SboxNum, attackModel)
 
 
 ########## START ##########
 if __name__== "__main__":
-    KNOW_KEY = getCorrectKeyByName(PATH_TRACE)
+    # KNOW_KEY = getCorrectKeyByName(PATH_TRACE)
+    KNOW_KEY = b'\x01\x02\x03\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
     infoNpzFile(npzfile)
+    for i in range(0,10):
+        printTrace(traces, i)
+        break
     attackAESinRounds(data, traces, traceRoundNumber , TRACES_NUMBER, SboxNum)
     sys.exit()
 
