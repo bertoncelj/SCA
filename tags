@@ -1,0 +1,434 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+A	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^A = 28$/;"	d
+A	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^A = 28$/;"	d
+A	AES_attack/Arduino/AESLib/gf256mul.S	/^A = 23$/;"	d
+AES128_DEC_H_	AES_attack/Arduino/AESLib/aes128_dec.h	29;"	d
+AES128_ENC_H_	AES_attack/Arduino/AESLib/aes128_enc.h	29;"	d
+AES192_DEC_H_	AES_attack/Arduino/AESLib/aes192_dec.h	29;"	d
+AES192_ENC_H_	AES_attack/Arduino/AESLib/aes192_enc.h	29;"	d
+AES256_DEC_H_	AES_attack/Arduino/AESLib/aes256_dec.h	29;"	d
+AES256_ENC_H_	AES_attack/Arduino/AESLib/aes256_enc.h	29;"	d
+AESLIB_H	AES_attack/Arduino/AESLib/AESLib.h	19;"	d
+AES_DEC_H_	AES_attack/Arduino/AESLib/aes_dec.h	28;"	d
+AES_ENC_H_	AES_attack/Arduino/AESLib/aes_enc.h	28;"	d
+AES_H_	AES_attack/Arduino/AESLib/aes.h	28;"	d
+AES_INVSBOX_H_	AES_attack/Arduino/AESLib/aes_invsbox.h	28;"	d
+AES_KEYSCHEDULE_H_	AES_attack/Arduino/AESLib/aes_keyschedule.h	30;"	d
+AES_SBOX_H_	AES_attack/Arduino/AESLib/aes_sbox.h	28;"	d
+AES_TYPES_H_	AES_attack/Arduino/AESLib/aes_types.h	28;"	d
+B	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^B = 29$/;"	d
+B	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^B = 29$/;"	d
+B	AES_attack/Arduino/AESLib/gf256mul.S	/^B = 22$/;"	d
+B0	AES_attack/leastSquare.py	/^B0 = y_mean - B1*x_mean$/;"	v
+B1	AES_attack/leastSquare.py	/^B1 = SSxy\/SSxx$/;"	v
+BCALCBC_H_	AES_attack/Arduino/AESLib/bcal-cbc.h	21;"	d
+BCALCMAC_H_	AES_attack/Arduino/AESLib/bcal-cmac.h	21;"	d
+BCALOFB_H_	AES_attack/Arduino/AESLib/bcal-ofb.h	22;"	d
+BCAL_BASIC_H_	AES_attack/Arduino/AESLib/bcal-basic.h	21;"	d
+BCDESC_TYPE_BLOCKCIPHER	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	77;"	d
+BC_DEC_TYPE	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	73;"	d
+BC_DEC_TYPE_1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	74;"	d
+BC_DEC_TYPE_2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	75;"	d
+BC_ENC_TYPE	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	69;"	d
+BC_ENC_TYPE_1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	70;"	d
+BC_ENC_TYPE_2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	71;"	d
+BC_INIT_TYPE	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	65;"	d
+BC_INIT_TYPE_1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	66;"	d
+BC_INIT_TYPE_2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	67;"	d
+BLOCKCIPHER_DESCRIPTOR_H_	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	29;"	d
+C1	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^C1 = 18$/;"	d
+CTR	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^CTR = 24$/;"	d
+CTR	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^CTR = 24$/;"	d
+CondAver	AES_attack/att.py	/^CondAver = ConditionalAveragerAesSbox(256, traceLength)$/;"	v
+ConditionalAveragerAesSbox	AES_attack/condaveraes.py	/^class ConditionalAveragerAesSbox:$/;"	c
+ConditionalAveragerAesSbox	condaveraes.py	/^class ConditionalAveragerAesSbox:$/;"	c
+GF256MUL_H_	AES_attack/Arduino/AESLib/gf256mul.h	20;"	d
+HI	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^HI = 23$/;"	d
+KEYSIZE_DESCRIPTOR_H_	AES_attack/Arduino/AESLib/keysize_descriptor.h	28;"	d
+KS_INT	AES_attack/Arduino/AESLib/keysize_descriptor.h	38;"	d
+KS_TYPE_ARG_RANGE	AES_attack/Arduino/AESLib/keysize_descriptor.h	36;"	d
+KS_TYPE_LIST	AES_attack/Arduino/AESLib/keysize_descriptor.h	34;"	d
+KS_TYPE_RANGE	AES_attack/Arduino/AESLib/keysize_descriptor.h	35;"	d
+KS_TYPE_TERMINATOR	AES_attack/Arduino/AESLib/keysize_descriptor.h	33;"	d
+M	AES_attack/leastSquare.py	/^M = X$/;"	v
+MEMXOR_H_	AES_attack/Arduino/AESLib/memxor.h	2;"	d
+N	AES_attack/att.py	/^N = 100 # number of traces to attack$/;"	v
+NEXT_NK	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^NEXT_NK = 19$/;"	d
+NK	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^NK = 22$/;"	d
+OPTIMIZE_SMALL_A	AES_attack/Arduino/AESLib/gf256mul.S	/^#define OPTIMIZE_SMALL_A$/;"	d
+P	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^P = 0$/;"	d
+P	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^P = 0$/;"	d
+P	AES_attack/Arduino/AESLib/gf256mul.S	/^P = 24$/;"	d
+P	AES_attack/leastSquare.py	/^P = np.dot(np.linalg.inv(np.dot(M.T, M)), M.T)$/;"	v
+PATH	cvsTotrs.py	/^PATH = "\/home\/tine\/Documents\/UNI\/FRI\/Kriptologija\/project\/SCA\/traces1"$/;"	v
+PATH_TRACE	main.py	/^PATH_TRACE="traces\/aes192_sb_ciph_ec40554bf67c9655d85cfd69ac04012f7ee1340ccf7b24fd.trs.npz"$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes128.c	/^const bcdesc_t aes128_desc PROGMEM = {$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes128.c	/^const char aes128_str[]   PROGMEM = "AES-128";$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes128.c	/^const uint8_t aes128_keysize_desc[] PROGMEM = { KS_TYPE_LIST, 1, KS_INT(128), $/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes192.c	/^const bcdesc_t aes192_desc PROGMEM = {$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes192.c	/^const char aes192_str[]   PROGMEM = "AES-192";$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes192.c	/^const uint8_t aes192_keysize_desc[] PROGMEM = { KS_TYPE_LIST, 1, KS_INT(192), $/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes256.c	/^const bcdesc_t aes256_desc PROGMEM = {$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes256.c	/^const char aes256_str[]   PROGMEM = "AES-256";$/;"	v
+PROGMEM	AES_attack/Arduino/AESLib/bcal_aes256.c	/^const uint8_t aes256_keysize_desc[] PROGMEM = { KS_TYPE_LIST, 1, KS_INT(256), $/;"	v
+Rsquare	AES_attack/leastSquare.py	/^def Rsquare(y, x):$/;"	f
+SBOX_SAVE0	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^SBOX_SAVE0 = 6$/;"	d
+SBOX_SAVE0	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^SBOX_SAVE0 = 14$/;"	d
+SBOX_SAVE1	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^SBOX_SAVE1 = 7$/;"	d
+SBOX_SAVE1	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^SBOX_SAVE1 = 15$/;"	d
+SSxx	AES_attack/leastSquare.py	/^    SSxx = SSxx + ((X[i]**2)-len(X)*x_mean**2)$/;"	v
+SSxx	AES_attack/leastSquare.py	/^SSxx=0$/;"	v
+SSxy	AES_attack/leastSquare.py	/^    SSxy = SSxy + (Y[i]*X[i]-len(X)*x_mean*y_mean)$/;"	v
+SSxy	AES_attack/leastSquare.py	/^SSxy=0$/;"	v
+ST00	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST00 =  8$/;"	d
+ST00	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST00 =  8$/;"	d
+ST01	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST01 =  9$/;"	d
+ST01	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST01 =  9$/;"	d
+ST02	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST02 = 10$/;"	d
+ST02	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST02 = 10$/;"	d
+ST03	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST03 = 11$/;"	d
+ST03	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST03 = 11$/;"	d
+ST10	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST10 = 12$/;"	d
+ST10	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST10 = 12$/;"	d
+ST11	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST11 = 13$/;"	d
+ST11	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST11 = 13$/;"	d
+ST12	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST12 = 14$/;"	d
+ST12	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST12 = 14$/;"	d
+ST13	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST13 = 15$/;"	d
+ST13	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST13 = 15$/;"	d
+ST20	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST20 = 16$/;"	d
+ST20	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST20 = 16$/;"	d
+ST21	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST21 = 17$/;"	d
+ST21	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST21 = 17$/;"	d
+ST22	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST22 = 18$/;"	d
+ST22	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST22 = 18$/;"	d
+ST23	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST23 = 19$/;"	d
+ST23	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST23 = 19$/;"	d
+ST30	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST30 = 20$/;"	d
+ST30	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST30 = 20$/;"	d
+ST31	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST31 = 21$/;"	d
+ST31	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST31 = 21$/;"	d
+ST32	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST32 = 22$/;"	d
+ST32	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST32 = 22$/;"	d
+ST33	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^ST33 = 23$/;"	d
+ST33	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^ST33 = 23$/;"	d
+SampleNum	AES_attack/att.py	/^SampleNum = 1025$/;"	v
+SboxNum	AES_attack/att.py	/^SboxNum = 9 # S-box to attack, counting from 0$/;"	v
+SboxNum	main.py	/^SboxNum = 14$/;"	v
+T0	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^T0 = 20$/;"	d
+T1	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^T1 = 21$/;"	d
+T2	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^T2 = 24$/;"	d
+T3	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^T3 = 25$/;"	d
+T4	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^T4 = 6$/;"	d
+T5	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^T5 = 7$/;"	d
+TRACES_NUMBER	main.py	/^TRACES_NUMBER = 100$/;"	v
+TRACE_LENGTH	lraAttack.py	/^TRACE_LENGTH = 0$/;"	v
+TRACE_LENGTH	main.py	/^TRACE_LENGTH = 2000 ## number of samples$/;"	v
+TRACE_STARTING_SAMPLE	main.py	/^TRACE_STARTING_SAMPLE = 0$/;"	v
+VOID_FPT	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	35;"	d
+X	AES_attack/leastSquare.py	/^X = X.T$/;"	v
+X	AES_attack/leastSquare.py	/^X = dataset["Salary"]$/;"	v
+X	AES_attack/leastSquare.py	/^X = np.array([X_new])$/;"	v
+X	AES_attack/leastSquare.py	/^X = sm.add_constant(X, prepend=False) # add constant coefficient (trailing column of ones)$/;"	v
+X	AES_attack/linearRegression.py	/^X = dataset.iloc[:,:-1].values #indpnedet variable array$/;"	v
+XRC	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^XRC = 17$/;"	d
+X_new	AES_attack/leastSquare.py	/^X_new = []$/;"	v
+Y	AES_attack/leastSquare.py	/^Y = dataset.iloc[:,:1].values  #dependent variable array$/;"	v
+Y	AES_attack/leastSquare.py	/^Y = np.array(Y)$/;"	v
+Y	AES_attack/linearRegression.py	/^Y = dataset.iloc[:,:1].values  #dependent variable array$/;"	v
+__init__	AES_attack/condaveraes.py	/^    def __init__(self, numValues, traceLength):$/;"	m	class:ConditionalAveragerAesSbox
+__init__	condaveraes.py	/^    def __init__(self, numValues, traceLength):$/;"	m	class:ConditionalAveragerAesSbox
+accu	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t*     accu;$/;"	m	struct:__anon2
+addTrace	AES_attack/condaveraes.py	/^    def addTrace(self, data, trace):$/;"	m	class:ConditionalAveragerAesSbox
+addTrace	condaveraes.py	/^    def addTrace(self, data, trace):$/;"	m	class:ConditionalAveragerAesSbox
+adjustedR2	AES_attack/lracpa.py	/^def adjustedR2(R2, n, p):$/;"	f
+aes128_cbc_dec	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_dec(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){$/;"	f
+aes128_cbc_dec_continue	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_dec_continue(const aes_context ctx, void* data, const uint16_t data_len){$/;"	f
+aes128_cbc_dec_finish	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_dec_finish(const aes_context ctx){$/;"	f
+aes128_cbc_dec_start	AES_attack/Arduino/AESLib/AESLib.c	/^aes_context aes128_cbc_dec_start(const uint8_t* key, const void* iv){$/;"	f
+aes128_cbc_enc	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){$/;"	f
+aes128_cbc_enc_continue	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_enc_continue(const aes_context ctx, void* data, const uint16_t data_len){$/;"	f
+aes128_cbc_enc_finish	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_cbc_enc_finish(const aes_context ctx){$/;"	f
+aes128_cbc_enc_start	AES_attack/Arduino/AESLib/AESLib.c	/^aes_context aes128_cbc_enc_start(const uint8_t* key, const void* iv){$/;"	f
+aes128_ctx_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes128_ctx_t;$/;"	t	typeref:struct:__anon4
+aes128_dec	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^aes128_dec:$/;"	l
+aes128_dec_multiple	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len){$/;"	f
+aes128_dec_single	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_dec_single(const uint8_t* key, void* data){$/;"	f
+aes128_enc	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^aes128_enc:$/;"	l
+aes128_enc_multiple	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len){$/;"	f
+aes128_enc_single	AES_attack/Arduino/AESLib/AESLib.c	/^void aes128_enc_single(const uint8_t* key, void* data){$/;"	f
+aes128_init	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^aes128_init:$/;"	l
+aes192_cbc_dec	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_dec(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){$/;"	f
+aes192_cbc_dec_continue	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_dec_continue(const aes_context ctx, void* data, const uint16_t data_len){$/;"	f
+aes192_cbc_dec_finish	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_dec_finish(const aes_context ctx){$/;"	f
+aes192_cbc_dec_start	AES_attack/Arduino/AESLib/AESLib.c	/^aes_context aes192_cbc_dec_start(const uint8_t* key, const void* iv){$/;"	f
+aes192_cbc_enc	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){$/;"	f
+aes192_cbc_enc_continue	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_enc_continue(const aes_context ctx, void* data, const uint16_t data_len){$/;"	f
+aes192_cbc_enc_finish	AES_attack/Arduino/AESLib/AESLib.c	/^void aes192_cbc_enc_finish(const aes_context ctx){$/;"	f
+aes192_cbc_enc_start	AES_attack/Arduino/AESLib/AESLib.c	/^aes_context aes192_cbc_enc_start(const uint8_t* key, const void* iv){$/;"	f
+aes192_ctx_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes192_ctx_t;$/;"	t	typeref:struct:__anon5
+aes192_dec	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^aes192_dec:$/;"	l
+aes192_enc	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^aes192_enc:$/;"	l
+aes192_init	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^aes192_init:$/;"	l
+aes256_ctx_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes256_ctx_t;$/;"	t	typeref:struct:__anon6
+aes256_dec	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^aes256_dec:$/;"	l
+aes256_dec_multiple	AES_attack/Arduino/AESLib/AESLib.c	/^void aes256_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len){$/;"	f
+aes256_dec_single	AES_attack/Arduino/AESLib/AESLib.c	/^void aes256_dec_single(const uint8_t* key, void* data){$/;"	f
+aes256_enc	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^aes256_enc:$/;"	l
+aes256_enc_multiple	AES_attack/Arduino/AESLib/AESLib.c	/^void aes256_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len){$/;"	f
+aes256_enc_single	AES_attack/Arduino/AESLib/AESLib.c	/^void aes256_enc_single(const uint8_t* key, void* data){$/;"	f
+aes256_init	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^aes256_init:$/;"	l
+aes_cipher_state_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes_cipher_state_t;$/;"	t	typeref:struct:__anon8
+aes_context	AES_attack/Arduino/AESLib/AESLib.h	/^typedef void* aes_context;$/;"	t
+aes_decrypt_core	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^aes_decrypt_core:$/;"	l
+aes_encrypt_core	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^aes_encrypt_core:$/;"	l
+aes_genctx_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes_genctx_t;$/;"	t	typeref:struct:__anon7
+aes_init	AES_attack/Arduino/AESLib/aes_keyschedule-asm.S	/^aes_init:$/;"	l
+aes_invsbox	AES_attack/Arduino/AESLib/aes_invsbox-asm.S	/^aes_invsbox:$/;"	l
+aes_roundkey_t	AES_attack/Arduino/AESLib/aes_types.h	/^} aes_roundkey_t;$/;"	t	typeref:struct:__anon3
+aes_sbox	AES_attack/Arduino/AESLib/aes_sbox-asm.S	/^aes_sbox:$/;"	l
+analyzeTool_top5	lraAttack.py	/^def analyzeTool_top5(R2outputs):$/;"	f
+arduino	recordTraces.py	/^arduino = serial.Serial(port='\/dev\/ttyACM0', baudrate=9600, timeout=.1)$/;"	v
+attack	lraAttack.py	/^def attack(data, traces):$/;"	f
+attackAES	linearAtt.py	/^def attackAES():$/;"	f
+attackAESinRounds	linearAtt.py	/^def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):$/;"	f
+attackFaster	lraAttack.py	/^def attackFaster(data, traces):$/;"	f
+attackMoreFaster	lraAttack.py	/^def attackMoreFaster(data, traces):$/;"	f
+attackMoreMoreFaster	lraAttack.py	/^def attackMoreMoreFaster(data, traces,SboxNum, intermediateFunction):$/;"	f
+attackSbox	linearAtt.py	/^def attackSbox(avgData, avgTraces, SboxNum, attackModel):$/;"	f
+basisFunctionsModelCurry	AES_attack/att.py	/^        def basisFunctionsModelCurry(x):$/;"	f	function:lraAES.basisFunctionsModelWrapper
+basisFunctionsModelCurry	AES_attack/lracpa.py	/^        def basisFunctionsModelCurry(x):$/;"	f	function:lraAES.basisFunctionsModelWrapper
+basisFunctionsModelCurry	AES_attack/lracpa.py	/^        def basisFunctionsModelCurry(x):$/;"	f	function:lraDES.basisFunctionsModelWrapper
+basisFunctionsModelCurry	lraAttack.py	/^        def basisFunctionsModelCurry(x):$/;"	f	function:lraAES.basisFunctionsModelWrapper
+basisFunctionsModelWrapper	AES_attack/att.py	/^    def basisFunctionsModelWrapper(y):$/;"	f	function:lraAES
+basisFunctionsModelWrapper	AES_attack/lracpa.py	/^    def basisFunctionsModelWrapper(y):$/;"	f	function:lraAES
+basisFunctionsModelWrapper	AES_attack/lracpa.py	/^    def basisFunctionsModelWrapper(y):$/;"	f	function:lraDES
+basisFunctionsModelWrapper	lraAttack.py	/^    def basisFunctionsModelWrapper(y):$/;"	f	function:lraAES
+basisModel256	AES_attack/lracpa.py	/^def basisModel256(x):$/;"	f
+basisModelHW	AES_attack/lracpa.py	/^def basisModelHW(x):$/;"	f
+basisModelHW	lraAttack.py	/^def basisModelHW(x):$/;"	f
+basisModelSingleBits	AES_attack/att.py	/^def basisModelSingleBits(x, bitWidth):$/;"	f
+basisModelSingleBits	AES_attack/lracpa.py	/^def basisModelSingleBits(x, bitWidth):$/;"	f
+basisModelSingleBits	lraAttack.py	/^def basisModelSingleBits(x):$/;"	f
+basisModelSingleBitsAndPairs	AES_attack/lracpa.py	/^def basisModelSingleBitsAndPairs(x, bitWidth):$/;"	f
+bc_dec1_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_dec1_fpt)(void*, void*);$/;"	t
+bc_dec2_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_dec2_fpt)(void*, void*, void*);$/;"	t
+bc_dec_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^} bc_dec_fpt;$/;"	t	typeref:union:__anon11
+bc_enc1_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_enc1_fpt)(void*, void*);$/;"	t
+bc_enc2_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_enc2_fpt)(void*, void*, void*);$/;"	t
+bc_enc_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^} bc_enc_fpt;$/;"	t	typeref:union:__anon10
+bc_free_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_free_fpt)(void*);$/;"	t
+bc_init1_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_init1_fpt)(void*, void*);$/;"	t
+bc_init2_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*bc_init2_fpt)(void*, uint16_t,void*);$/;"	t
+bc_init_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^} bc_init_fpt;$/;"	t	typeref:union:__anon9
+bcal_cbc_ctx_t	AES_attack/Arduino/AESLib/bcal-cbc.h	/^} bcal_cbc_ctx_t;$/;"	t	typeref:struct:__anon1
+bcal_cbc_decMsg	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_decMsg(const void* iv, void* msg, uint16_t msg_blocks, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_decNext	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_decNext(void* block, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_decRand	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_decRand(void* block, const void* prev_block, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_encMsg	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_encMsg(const void* iv, void* msg, uint16_t msg_blocks, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_encNext	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_encNext(void* block, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_free	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_free(bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_init	AES_attack/Arduino/AESLib/bcal-cbc.c	/^uint8_t bcal_cbc_init(const bcdesc_t* desc, const void* key, uint16_t keysize_b, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cbc_loadIV	AES_attack/Arduino/AESLib/bcal-cbc.c	/^void bcal_cbc_loadIV(const void* iv, bcal_cbc_ctx_t* ctx){$/;"	f
+bcal_cipher_dec	AES_attack/Arduino/AESLib/bcal-basic.c	/^void bcal_cipher_dec(void* block, const bcgen_ctx_t* ctx){$/;"	f
+bcal_cipher_enc	AES_attack/Arduino/AESLib/bcal-basic.c	/^void bcal_cipher_enc(void* block, const bcgen_ctx_t* ctx){$/;"	f
+bcal_cipher_free	AES_attack/Arduino/AESLib/bcal-basic.c	/^void bcal_cipher_free(bcgen_ctx_t* ctx){$/;"	f
+bcal_cipher_getBlocksize_b	AES_attack/Arduino/AESLib/bcal-basic.c	/^uint16_t bcal_cipher_getBlocksize_b(const bcdesc_t* desc){$/;"	f
+bcal_cipher_getKeysizeDesc	AES_attack/Arduino/AESLib/bcal-basic.c	/^PGM_VOID_P bcal_cipher_getKeysizeDesc(const bcdesc_t* desc){$/;"	f
+bcal_cipher_init	AES_attack/Arduino/AESLib/bcal-basic.c	/^uint8_t bcal_cipher_init(const bcdesc_t* cipher_descriptor,$/;"	f
+bcal_cmac	AES_attack/Arduino/AESLib/bcal-cmac.c	/^void bcal_cmac(void* dest, uint16_t out_length_b, const void* block, uint32_t length_b, bcal_cmac_ctx_t* ctx){$/;"	f
+bcal_cmac_ctx2mac	AES_attack/Arduino/AESLib/bcal-cmac.c	/^void bcal_cmac_ctx2mac(void* dest, uint16_t length_b, const bcal_cmac_ctx_t* ctx){$/;"	f
+bcal_cmac_ctx_t	AES_attack/Arduino/AESLib/bcal-cmac.h	/^} bcal_cmac_ctx_t;$/;"	t	typeref:struct:__anon2
+bcal_cmac_free	AES_attack/Arduino/AESLib/bcal-cmac.c	/^void bcal_cmac_free(bcal_cmac_ctx_t* ctx){$/;"	f
+bcal_cmac_init	AES_attack/Arduino/AESLib/bcal-cmac.c	/^uint8_t bcal_cmac_init(const bcdesc_t* desc, const void* key, uint16_t keysize_b, bcal_cmac_ctx_t* ctx){$/;"	f
+bcal_cmac_lastBlock	AES_attack/Arduino/AESLib/bcal-cmac.c	/^void bcal_cmac_lastBlock(bcal_cmac_ctx_t* ctx, const void* block, uint16_t length_b){$/;"	f
+bcal_cmac_nextBlock	AES_attack/Arduino/AESLib/bcal-cmac.c	/^void bcal_cmac_nextBlock (bcal_cmac_ctx_t* ctx, const void* block){$/;"	f
+bcal_ofb_ctx_t	AES_attack/Arduino/AESLib/bcal-ofb.h	/^} bcal_ofb_ctx_t;$/;"	t	typeref:struct:__anon17
+bcal_ofb_decMsg	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_decMsg(const void* iv, void* msg, uint32_t msg_len_b, bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_decNext	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_decNext(void* block, bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_encMsg	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_encMsg(const void* iv, void* msg, uint32_t msg_len_b, bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_encNext	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_encNext(void* block, bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_free	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_free(bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_init	AES_attack/Arduino/AESLib/bcal-ofb.c	/^uint8_t bcal_ofb_init(const bcdesc_t* desc, const void* key, uint16_t keysize_b, bcal_ofb_ctx_t* ctx){$/;"	f
+bcal_ofb_loadIV	AES_attack/Arduino/AESLib/bcal-ofb.c	/^void bcal_ofb_loadIV(const void* iv, bcal_ofb_ctx_t* ctx){$/;"	f
+bcdesc_t	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^} bcdesc_t; \/* blockcipher descriptor type *\/$/;"	t	typeref:struct:__anon12
+bcgen_ctx_t	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^} bcgen_ctx_t;$/;"	t	typeref:struct:__anon13
+beta	AES_attack/leastSquare.py	/^beta = np.dot(P, Y)$/;"	v
+beta	AES_attack/leastSquare.py	/^beta = np.dot(leva, desna)$/;"	v
+betaOLS	AES_attack/leastSquare.py	/^betaOLS = results.params $/;"	v
+blocksize_B	AES_attack/Arduino/AESLib/bcal-cbc.h	/^	uint8_t      blocksize_B;$/;"	m	struct:__anon1
+blocksize_B	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t      blocksize_B;$/;"	m	struct:__anon2
+blocksize_B	AES_attack/Arduino/AESLib/bcal-ofb.h	/^	uint8_t      blocksize_B;$/;"	m	struct:__anon17
+blocksize_b	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	uint16_t blocksize_b;$/;"	m	struct:__anon12
+byteHammingWeight	AES_attack/lracpa.py	/^byteHammingWeight = np.load('data\/bytehammingweight.npy') # HW of a byte$/;"	v
+byteHammingWeight	lraAttack.py	/^byteHammingWeight = np.load('data\/bytehammingweight.npy') # HW of a byte$/;"	v
+byte_to_int	AES_attack/att.py	/^def byte_to_int(byteArr):$/;"	f
+calcRsquare	lraAttack.py	/^def calcRsquare(timeSliceTrace, appliedModelData, beta):$/;"	f
+calcRsquareFast	lraAttack.py	/^def calcRsquareFast(timeSliceTrace, appliedModelData, beta):$/;"	f
+cctx	AES_attack/Arduino/AESLib/bcal-cbc.h	/^	bcgen_ctx_t  cctx;$/;"	m	struct:__anon1
+cctx	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	bcgen_ctx_t  cctx;$/;"	m	struct:__anon2
+cctx	AES_attack/Arduino/AESLib/bcal-ofb.h	/^	bcgen_ctx_t  cctx;$/;"	m	struct:__anon17
+clickMouse	recordTraces.py	/^def clickMouse(x,y):$/;"	f
+const_128	AES_attack/Arduino/AESLib/bcal-cmac.c	/^static const uint8_t const_128 = 0x87;$/;"	v	file:
+const_64	AES_attack/Arduino/AESLib/bcal-cmac.c	/^static const uint8_t const_64  = 0x1b;$/;"	v	file:
+correlationTraceSO	AES_attack/lracpa.py	/^def correlationTraceSO(O, P):$/;"	f
+correlationTraces	AES_attack/lracpa.py	/^def correlationTraces(O, P):$/;"	f
+count	recordTraces.py	/^    count = count+1$/;"	v
+count	recordTraces.py	/^count=0$/;"	v
+cpaAES	AES_attack/lracpa.py	/^def cpaAES(data, traces, intermediateFunction, leakageFunction):$/;"	f
+cpaDES	AES_attack/lracpa.py	/^def cpaDES(data, traces, intermediateFunction, sBoxNumber, leakageFunction):$/;"	f
+ctx	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	void*     ctx;$/;"	m	struct:__anon13
+ctxsize_B	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	uint16_t ctxsize_B;$/;"	m	struct:__anon12
+cvs_type	recordTraces.py	/^cvs_type = (969, 723)$/;"	v
+data	AES_attack/att.py	/^data = npzfile['data'][inputRange,SboxNum]$/;"	v
+data	AES_attack/att.py	/^data = npzfile['data'][offset:offset + N,SboxNum] # selecting only the required byte$/;"	v
+data	cvsTotrs.py	/^data = np.empty(shape=(177, 16), dtype='uint8')$/;"	v
+data	main.py	/^data = npzfile['data'][:, SboxNum]$/;"	v
+dataset	AES_attack/leastSquare.py	/^dataset = pd.read_csv('Salary_Data.csv')$/;"	v
+dataset	AES_attack/linearRegression.py	/^dataset = pd.read_csv('Salary_Data.csv')$/;"	v
+dec	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_dec_fpt  dec;$/;"	m	struct:__anon12
+dec1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_dec1_fpt dec1;$/;"	m	union:__anon11
+dec2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_dec2_fpt dec2;$/;"	m	union:__anon11
+decvoid	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	void_fpt  decvoid;$/;"	m	union:__anon11
+desc	AES_attack/Arduino/AESLib/bcal-cbc.h	/^	bcdesc_t*    desc;$/;"	m	struct:__anon1
+desc	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	bcdesc_t*    desc;$/;"	m	struct:__anon2
+desc	AES_attack/Arduino/AESLib/bcal-ofb.h	/^	bcdesc_t*    desc;$/;"	m	struct:__anon17
+desc_ptr	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bcdesc_t* desc_ptr;$/;"	m	struct:__anon13
+desna	AES_attack/leastSquare.py	/^desna = np.dot(X.T, Y)$/;"	v
+directories	cvsTotrs.py	/^directories = os.listdir(PATH)$/;"	v
+dispayTop5	lraAttack.py	/^def dispayTop5(pairsTuplesMaxs):$/;"	f
+displayCorrectKeyOnTrace	lraAttack.py	/^def displayCorrectKeyOnTrace(traces, point, trace_start_point):$/;"	f
+displayR2WinningKeys	lraAttack.py	/^def displayR2WinningKeys(R2outputs, knowKey):$/;"	f
+distance	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t distance;$/;"	m	struct:__anon16
+dummy	AES_attack/leastSquare.py	/^dummy = dummy.astype('float64')$/;"	v
+dummy	AES_attack/leastSquare.py	/^dummy = np.ones(len(X))$/;"	v
+enc	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_enc_fpt  enc;$/;"	m	struct:__anon12
+enc1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_enc1_fpt enc1;$/;"	m	union:__anon10
+enc2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_enc2_fpt enc2;$/;"	m	union:__anon10
+encvoid	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	void_fpt  encvoid;$/;"	m	union:__anon10
+evolutionStep	AES_attack/att.py	/^evolutionStep = 10 # step of intermediate reports$/;"	v
+exit	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^exit:$/;"	l
+exit	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^exit:	$/;"	l
+findAllUnderScores	cvsTotrs.py	/^def findAllUnderScores(FILE_PATH, num, listR):$/;"	f
+findLastUnderScore	linearAtt.py	/^def findLastUnderScore(num, last):$/;"	f
+flags	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	uint8_t  flags;$/;"	m	struct:__anon12
+free	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_free_fpt free;$/;"	m	struct:__anon12
+generateRandomData	recordTraces.py	/^def generateRandomData():$/;"	f
+generateRandomNum	recordTraces.py	/^def generateRandomNum():$/;"	f
+generateRandomNumInt	recordTraces.py	/^def generateRandomNumInt():$/;"	f
+getBeta	lraAttack.py	/^def getBeta(X, Y):$/;"	f
+getBeta_step1	lraAttack.py	/^def getBeta_step1(X):$/;"	f
+getBeta_step2	lraAttack.py	/^def getBeta_step2(X, Y, leva):$/;"	f
+getCorrectKeyByName	linearAtt.py	/^def getCorrectKeyByName(name):$/;"	f
+getDataFromFileName	cvsTotrs.py	/^def getDataFromFileName(FILE_PATH):$/;"	f
+getKeyLocationOnTrace	lraAttack.py	/^def getKeyLocationOnTrace(R2outputs, traces):$/;"	f
+getSnapshot	AES_attack/condaveraes.py	/^    def getSnapshot(self):$/;"	m	class:ConditionalAveragerAesSbox
+getSnapshot	condaveraes.py	/^    def getSnapshot(self):$/;"	m	class:ConditionalAveragerAesSbox
+get_keysize	AES_attack/Arduino/AESLib/keysize_descriptor.c	/^uint16_t get_keysize(PGM_VOID_P ks_desc){$/;"	f
+get_keysizes	AES_attack/Arduino/AESLib/keysize_descriptor.c	/^uint16_t get_keysizes(PGM_VOID_P ks_desc, uint16_t** list){$/;"	f
+gf256mul	AES_attack/Arduino/AESLib/gf256mul.S	/^gf256mul:$/;"	l
+in_block	AES_attack/Arduino/AESLib/bcal-ofb.h	/^	uint8_t*     in_block;$/;"	m	struct:__anon17
+infoNpzFile	linearAtt.py	/^def infoNpzFile(npzfile):$/;"	f
+init	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_init_fpt init;$/;"	m	struct:__anon12
+init1	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_init1_fpt init1;$/;"	m	union:__anon9
+init2	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	bc_init2_fpt init2;$/;"	m	union:__anon9
+initvoid	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	void_fpt  initvoid;$/;"	m	union:__anon9
+inputRange	AES_attack/att.py	/^inputRange = range(0, 1000) # range for traces (not samples!)$/;"	v
+invSboxInXorOut	AES_attack/lracpa.py	/^def invSboxInXorOut(data, keyByte):$/;"	f
+invSboxOut	AES_attack/lracpa.py	/^def invSboxOut(data, keyByte):$/;"	f
+invsbox	AES_attack/lracpa.py	/^invsbox           = np.load('data\/aesinvsbox.npy')        # AES inverse S-box$/;"	v
+is_valid_keysize_P	AES_attack/Arduino/AESLib/keysize_descriptor.c	/^uint8_t is_valid_keysize_P(PGM_VOID_P ks_desc, uint16_t keysize){$/;"	f
+items	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t items[]; \/* list of valid lengths *\/$/;"	m	struct:__anon14
+k1	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t*     k1;$/;"	m	struct:__anon2
+k2	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t*     k2;$/;"	m	struct:__anon2
+key	AES_attack/Arduino/AESLib/aes_types.h	/^	aes_roundkey_t key[10+1];$/;"	m	struct:__anon4
+key	AES_attack/Arduino/AESLib/aes_types.h	/^	aes_roundkey_t key[12+1];$/;"	m	struct:__anon5
+key	AES_attack/Arduino/AESLib/aes_types.h	/^	aes_roundkey_t key[14+1];$/;"	m	struct:__anon6
+key	AES_attack/Arduino/AESLib/aes_types.h	/^	aes_roundkey_t key[1]; \/* just to avoid the warning *\/$/;"	m	struct:__anon7
+keyRankEvolutionLRA	AES_attack/att.py	/^keyRankEvolutionLRA = np.zeros(numSteps)$/;"	v
+keysize	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	uint16_t  keysize;$/;"	m	struct:__anon13
+keysize_desc_arg_range_t	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^}keysize_desc_arg_range_t;$/;"	t	typeref:struct:__anon16
+keysize_desc_list_t	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^}keysize_desc_list_t;$/;"	t	typeref:struct:__anon14
+keysize_desc_range_t	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^}keysize_desc_range_t;$/;"	t	typeref:struct:__anon15
+knowKey	AES_attack/att.py	/^knowKey = b'\\x2b\\x7e\\x15\\x16\\x28\\xae\\xd2\\xa6\\xab\\xf7\\x15\\x88\\x09\\xcf\\x4f\\x3c'$/;"	v
+knownKey1	AES_attack/att.py	/^knownKey1 = byte_to_int(knowKey)$/;"	v
+ks	AES_attack/Arduino/AESLib/aes_types.h	/^	uint8_t ks[16];$/;"	m	struct:__anon3
+last_set	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t      last_set;$/;"	m	struct:__anon2
+lastblock	AES_attack/Arduino/AESLib/bcal-cmac.h	/^	uint8_t*     lastblock;$/;"	m	struct:__anon2
+leakageModel2	lraAttack.py	/^def leakageModel2(x):$/;"	f
+leakageModelHW	AES_attack/lracpa.py	/^def leakageModelHW(x):$/;"	f
+left_shift_be_block	AES_attack/Arduino/AESLib/bcal-cmac.c	/^static uint8_t left_shift_be_block(void* block, uint8_t blocksize_B){$/;"	f	file:
+leva	AES_attack/leastSquare.py	/^leva = np.linalg.inv(xsi)$/;"	v
+lraAES	AES_attack/att.py	/^def lraAES(data, traces, intermediateFunction, basisFunctionsModel):$/;"	f
+lraAES	AES_attack/lracpa.py	/^def lraAES(data, traces, intermediateFunction, basisFunctionsModel):$/;"	f
+lraAES	lraAttack.py	/^def lraAES(data, traces, intermediateFunction, basisFunctionsModel):$/;"	f
+lraDES	AES_attack/lracpa.py	/^def lraDES(data, traces, intermediateFunction, sBoxNumber, basisFunctionsModel):$/;"	f
+lut_gf256mul_0x04	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^lut_gf256mul_0x04:$/;"	l
+lut_gf256mul_0x09	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^lut_gf256mul_0x09:$/;"	l
+max	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t max;$/;"	m	struct:__anon15
+max	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t max;$/;"	m	struct:__anon16
+memxor	AES_attack/Arduino/AESLib/memxor.S	/^memxor:$/;"	l
+min	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t min;$/;"	m	struct:__anon15
+min	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t min;$/;"	m	struct:__anon16
+n_items	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint8_t  n_items;  \/* number of items (value 0 is reserved) *\/$/;"	m	struct:__anon14
+name	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	PGM_P    name;$/;"	m	struct:__anon12
+normalizeR2Traces	AES_attack/lracpa.py	/^def normalizeR2Traces(R2):$/;"	f
+npzfile	AES_attack/att.py	/^npzfile = np.load('traces\/swaes_atmega_power.trs.npz')$/;"	v
+npzfile	AES_attack/att.py	/^npzfile = np.load(tracesetFilename)$/;"	v
+npzfile	main.py	/^npzfile = np.load(PATH_TRACE)$/;"	v
+numSteps	AES_attack/att.py	/^numSteps = int(np.ceil(N \/ np.double(evolutionStep)))$/;"	v
+offset	AES_attack/Arduino/AESLib/keysize_descriptor.h	/^	uint16_t offset;$/;"	m	struct:__anon16
+offset	AES_attack/att.py	/^offset = 0 # traces number to start from$/;"	v
+offset	main.py	/^offset = 0$/;"	v
+parityOf	AES_attack/lracpa.py	/^def parityOf(int_type):$/;"	f
+prev_block	AES_attack/Arduino/AESLib/bcal-cbc.h	/^	uint8_t*     prev_block;$/;"	m	struct:__anon1
+printTrace	linearAtt.py	/^def printTrace(npzTrace, numTrace=0):$/;"	f
+printWinningKey	lraAttack.py	/^def printWinningKey(R2outputs, correctKey):$/;"	f
+readFile	cvsTotrs.py	/^def readFile(path):$/;"	f
+readSerial	recordTraces.py	/^def readSerial(x):$/;"	f
+reg	AES_attack/linearRegression.py	/^reg= LinearRegression()$/;"	v
+reset_cursor	recordTraces.py	/^def reset_cursor():$/;"	f
+results	AES_attack/leastSquare.py	/^results = sm.OLS(Y, X).fit() # the OLS itself$/;"	v
+s	AES_attack/Arduino/AESLib/aes_types.h	/^	uint8_t s[16];$/;"	m	struct:__anon8
+sBoxInXorOut	AES_attack/lracpa.py	/^def sBoxInXorOut(data, keyByte):$/;"	f
+sBoxOut	AES_attack/att.py	/^def sBoxOut(data, keyByte):$/;"	f
+sBoxOut	AES_attack/lracpa.py	/^def sBoxOut(data, keyByte):$/;"	f
+sBoxOut	lraAttack.py	/^def sBoxOut(data, keyByte):$/;"	f
+sampleRange	AES_attack/att.py	/^sampleRange = (1000, 1400) # range sample to attack $/;"	v
+sampleRange	main.py	/^sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)$/;"	v
+saveResultIntoFile	linearAtt.py	/^def saveResultIntoFile(fileName, dataToSave):$/;"	f
+save_as	recordTraces.py	/^save_as = (44, 150)$/;"	v
+save_button	recordTraces.py	/^save_button = (1010, 700)$/;"	v
+sbox	AES_attack/att.py	/^sbox = np.load('data\/aessbox.npy') $/;"	v
+sbox	AES_attack/lracpa.py	/^sbox              = np.load('data\/aessbox.npy')           # AES S-box$/;"	v
+sbox	lraAttack.py	/^sbox = np.load('data\/aessbox.npy')$/;"	v
+select_type_menu	recordTraces.py	/^select_type_menu = (954,661)$/;"	v
+start_file_menu	recordTraces.py	/^start_file_menu  =(16, 40)$/;"	v
+start_trigger	recordTraces.py	/^start_trigger = (87, 782)$/;"	v
+stringToType	recordTraces.py	/^    stringToType = "aes_forward_" + hexKeyStr + "_"$/;"	v
+trace	cvsTotrs.py	/^    trace = readFile(file)$/;"	v
+traceRoundNumber	main.py	/^traceRoundNumber = 100$/;"	v
+traces	AES_attack/att.py	/^traces = npzfile['traces'][inputRange,SampleNum]$/;"	v
+traces	AES_attack/att.py	/^traces = npzfile['traces'][offset:offset + N,sampleRange[0]:sampleRange[1]]$/;"	v
+traces	cvsTotrs.py	/^traces = np.empty(shape=(177, 4389), dtype='int')$/;"	v
+traces	main.py	/^traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]$/;"	v
+tracesToSkip	AES_attack/att.py	/^tracesToSkip = 20 # warm-up to avoid numerical problems for small evolution step$/;"	v
+tracesetFilename	AES_attack/att.py	/^tracesetFilename = "traces\/swaes_atmega_power.trs.npz"$/;"	v
+type	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	uint8_t  type; \/* 1==blockcipher *\/$/;"	m	struct:__anon12
+valid_keysize_desc	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^	PGM_VOID_P valid_keysize_desc;$/;"	m	struct:__anon12
+void_fpt	AES_attack/Arduino/AESLib/blockcipher_descriptor.h	/^typedef void(*void_fpt)(void);$/;"	t
+writeSerial	recordTraces.py	/^def writeSerial(x):$/;"	f
+write_cursor	recordTraces.py	/^write_cursor = (359, 133)$/;"	v
+xREDUCER	AES_attack/Arduino/AESLib/aes_dec-asm_faster.S	/^xREDUCER = 25 $/;"	d
+xREDUCER	AES_attack/Arduino/AESLib/aes_enc-asm.S	/^xREDUCER = 25$/;"	d
+x_mean	AES_attack/leastSquare.py	/^x_mean = np.mean(X)$/;"	v
+xsi	AES_attack/leastSquare.py	/^xsi = np.dot(X.T, X)$/;"	v
+y_mean	AES_attack/leastSquare.py	/^y_mean = np.mean(Y)$/;"	v
+y_pred	AES_attack/linearRegression.py	/^y_pred = reg.predict(X_test)$/;"	v
+y_rez1	AES_attack/leastSquare.py	/^y_rez1 = []$/;"	v
+y_rez2	AES_attack/leastSquare.py	/^y_rez2 = []$/;"	v

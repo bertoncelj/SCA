@@ -18,38 +18,43 @@ np.set_printoptions(threshold=sys.maxsize)
     # Why does offset in traces fuck up everythink?
 
 ####################### CONFIG ############################ 
-SboxNum =2 
-TRACES_NUMBER = 100
-TRACE_LENGTH = 2800 ## number of samples
-TRACE_STARTING_SAMPLE = 0
-offset = 0
-traceRoundNumber=100
+# SboxNum = 14
+# TRACES_NUMBER = 100
+# TRACE_LENGTH = 2000 ## number of samples
+# TRACE_STARTING_SAMPLE = 0
+# offset = 0
+# traceRoundNumber = 100
 # PATH_TRACE = "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
 
 # PATH_TRACE = "traces/swaes_atmega_power.trs.npz"
 
-KNOW_KEY = b''
-ALL_POSSIBLE_KEY = int("0xff", 16)
+# KNOW_KEY = b''
+# ALL_POSSIBLE_KEY = int("0xff", 16)
 
 # PATH_TRACE="aes256_sb_ciph_be947018518aadeccacd0a94a3057a90c29eae7296a5ee0850e9de3db91e7d83.trs.npz"
 # PATH_TRACE="traces/aes192_sb_ciph_ec40554bf67c9655d85cfd69ac04012f7ee1340ccf7b24fd.trs.npz"
 # PATH_TRACE="aestraces/aes128_sb_eqinvciph_f50f5782bac97baabdbe69c6cf94d2e2.trs.npz"
 # PATH_TRACE="testNpz3.npz"
+# PATH_TRACE= "aestraces/aes128_sb_ciph_0fec9ca47fb2f2fd4df14dcb93aa4967.trs.npz"
 
 
 # KNOW_KEY = b'\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
-PATH_TRACE="traces/swaes_atmega_power.trs.npz"
+# PATH_TRACE="traces/swaes_atmega_power.trs.npz"
 
 ####################### CONFIG ############################ 
 
 # Load files -> pick out traces and data
-traceRange = range(0, TRACES_NUMBER)
-sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
+# traceRange = range(0, TRACES_NUMBER)
+# sampleRange = (TRACE_STARTING_SAMPLE, TRACE_STARTING_SAMPLE + TRACE_LENGTH)
 
-npzfile = np.load(PATH_TRACE)
-traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
-data = npzfile['data'][:, SboxNum]
-
+# npzfile = np.load(PATH_TRACE)
+# traces = npzfile['traces'][offset:offset + TRACES_NUMBER,sampleRange[0]:sampleRange[1]]
+# data = npzfile['data'][:, SboxNum]
+# print("BEFORE!")
+# print(traces)
+# traces = traces[:,1::2]
+# print("AFTER!")
+# print(traces)
 
 def findLastUnderScore(num, last):
     num = PATH_TRACE.find("_",num)
@@ -95,6 +100,7 @@ def infoNpzFile(npzfile):
         print("Matrix size: rows:", rows, " colums: ", colums)
 
 def printTrace(npzTrace, numTrace=0):
+    KNOW_KEY = b'\x01\x02\x03\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
     xLength = len(npzTrace[numTrace, :])
     print("len x: ", xLength)
     xSamples = range(0, xLength)
@@ -145,7 +151,7 @@ def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):
             # print(data[i])
             # print(traces[i])
             Avg.addTrace(data[i], traces[i])
-        
+
         (avgData, avgTraces) = Avg.getSnapshot()
         print("avgData: ", avgData)
         print("avgData len: ", len(avgData))
@@ -155,19 +161,18 @@ def attackAESinRounds(data, traces, traceRoundNum, traceNum, SboxNum):
         print("(" , index+1,"/",len(trArr),") Attack by blocks")
         print("Trace attack to: N = ", span[1])
 
-        # attackModel = basisModelSingleBits
         attackModel = basisModelHW
+        # attackModel = basisModelHW
         attackSbox(avgData, avgTraces, SboxNum, attackModel)
 
 
 ########## START ##########
-if __name__== "__main__":
-    # KNOW_KEY = getCorrectKeyByName(PATH_TRACE)
-    KNOW_KEY = b'\x01\x02\x03\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c'
+
+def attackAES():
+    KNOW_KEY = getCorrectKeyByName(PATH_TRACE)
     infoNpzFile(npzfile)
     for i in range(0,10):
         printTrace(traces, i)
         break
     attackAESinRounds(data, traces, traceRoundNumber , TRACES_NUMBER, SboxNum)
     sys.exit()
-
